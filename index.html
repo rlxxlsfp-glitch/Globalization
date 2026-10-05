@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>통합사회A</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#17191F">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="통합사회A">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css">
+<style>
+@font-face{font-family:"NanumSquareA";font-weight:400;src:local("NanumSquare"),local("NanumSquareR"),local("나눔스퀘어"),url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/NanumSquareR.woff) format("woff")}
+@font-face{font-family:"NanumSquareA";font-weight:700;src:local("NanumSquare Bold"),local("NanumSquareB"),local("나눔스퀘어 Bold"),url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/NanumSquareB.woff) format("woff")}
+@font-face{font-family:"NanumSquareA";font-weight:800;src:local("NanumSquare ExtraBold"),local("NanumSquareEB"),local("나눔스퀘어 ExtraBold"),url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/NanumSquareEB.woff) format("woff")}
+</style>
+<style>
+:root{
+  --bg:#FFFFFF; --card:#F3F4F6; --ink:#1B1D22; --sub:#6B7280; --line:#E3E5E9;
+  --mk:#FFF06A; --mkink:#1B1D22; --ul:#E5484D; --star:#E5484D; --badge:#E5484D;
+  --ok:#16A36A; --bad:#E5484D; --okbg:rgba(22,163,106,.12); --badbg:rgba(229,72,77,.12);
+  --tabbg:#FFFFFF;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17191F; --card:#23262E; --ink:#E9EBF0; --sub:#9AA0AB; --line:#30343D;
+  --mk:#5E5300; --mkink:#FFF3B0; --ul:#FF5C5C; --star:#FF5C5C; --badge:#E5484D;
+  --ok:#3DD68C; --bad:#FF6B6B; --okbg:rgba(61,214,140,.13); --badbg:rgba(255,107,107,.13);
+  --tabbg:#17191F;
+}}
+:root[data-theme="dark"]{
+  --bg:#17191F; --card:#23262E; --ink:#E9EBF0; --sub:#9AA0AB; --line:#30343D;
+  --mk:#5E5300; --mkink:#FFF3B0; --ul:#FF5C5C; --star:#FF5C5C; --badge:#E5484D;
+  --ok:#3DD68C; --bad:#FF6B6B; --okbg:rgba(61,214,140,.13); --badbg:rgba(255,107,107,.13);
+  --tabbg:#17191F;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{height:100%;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 20px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"NanumSquareA","NanumSquare","나눔스퀘어","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:17px;line-height:1.85;-webkit-text-size-adjust:100%;word-break:keep-all}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,.b:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.wrap{max-width:780px;margin:0 auto;padding:0 22px calc(110px + env(safe-area-inset-bottom,0px))}
+
+header{padding:34px 0 6px;position:relative}
+h1{font-size:30px;font-weight:800;margin:0;letter-spacing:-.5px}
+.unit{margin:4px 0 0;color:var(--sub);font-size:15px}
+.theme{position:absolute;right:0;top:38px;border:1px solid var(--line);background:transparent;border-radius:999px;padding:4px 12px;font-size:13px;color:var(--sub)}
+
+/* bottom tabs */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--tabbg);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.tabs .in{display:flex;width:100%;max-width:780px}
+nav.tabs button{flex:1;border:0;background:transparent;padding:14px 0 16px;font-size:16px;color:var(--sub);position:relative}
+nav.tabs button[aria-selected="true"]{color:var(--ink);font-weight:800}
+nav.tabs button[aria-selected="true"]::before{content:"";position:absolute;top:-1px;left:30%;right:30%;height:3px;background:var(--ink);border-radius:2px}
+.view{display:none}.view.on{display:block}
+
+/* concept toolbar */
+.toolbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:22px 0 6px}
+.pill{border:1.5px solid var(--ink);background:transparent;padding:8px 20px;border-radius:999px;font-size:16px}
+.pill.on{background:var(--ink);color:var(--bg)}
+.legend{display:flex;gap:10px;align-items:center;font-size:15px}
+.legend .m{background:var(--mk);color:var(--mkink);padding:0 4px}
+.legend .u{border-bottom:2px solid var(--ul)}
+.legend .s{color:var(--star)}
+.jump{display:flex;gap:18px;overflow-x:auto;padding:10px 0 4px;scrollbar-width:none;font-size:15px}
+.jump::-webkit-scrollbar{display:none}
+.jump a{flex:none;color:var(--sub);text-decoration:none}
+
+/* concept body */
+.part{margin-top:44px}
+.part>h2{font-size:26px;font-weight:800;margin:0 0 4px;letter-spacing:-.5px}
+.part>.src{color:var(--sub);font-size:14px;margin:0}
+.topic{margin-top:34px}
+.topic>h3{font-size:22px;font-weight:800;margin:0 0 14px;letter-spacing:-.3px}
+h4{font-size:19px;font-weight:700;margin:26px 0 10px}
+.mean{border-left:3px solid var(--ink);padding:2px 0 2px 16px;margin:10px 0 18px}
+.mean b{font-weight:800}
+p{margin:6px 0}
+ul.dot{list-style:none;padding:0;margin:6px 0}
+ul.dot li{padding-left:16px;position:relative;margin:4px 0}
+ul.dot li::before{content:"·";position:absolute;left:4px}
+.box{background:var(--card);border-radius:14px;padding:18px 22px;margin:14px 0}
+.box .bt{font-weight:800;margin:0 0 8px}
+.box .row{display:flex;gap:14px;padding:10px 0;border-top:1px solid var(--line)}
+.box .row:first-of-type{border-top:0;padding-top:2px}
+.box .row .rk{flex:none;width:7.2em;font-weight:800}
+.box .row .rv{flex:1;min-width:0}
+.steps{font-weight:700}
+.ex{color:var(--sub)}
+.part>h2{font-size:25px}
+h3.sub{font-size:21px;font-weight:800;margin:30px 0 0}
+.tt{font-size:22px;font-weight:800;margin:0 0 12px}
+.lb{font-weight:800;margin:18px 0 4px}
+.fn{color:var(--sub);font-size:15px;line-height:1.7}
+.memo{margin:16px 0 0;padding:12px 18px;background:var(--card);border-radius:14px}
+.memo p{margin:1px 0}
+.note{border-top:1px dashed var(--line);margin-top:20px;padding-top:12px;color:var(--sub);font-size:15px;line-height:1.75}
+.note p{margin:2px 0}
+.b{background:var(--mk);color:var(--mkink);padding:1px 4px;border-radius:2px;font-weight:700;cursor:pointer;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+body.hide .b:not(.open){color:transparent;user-select:none}
+.u{border-bottom:2px solid var(--ul);padding-bottom:1px}
+.star{color:var(--star)}
+.badge{display:inline-block;background:var(--badge);color:#fff;font-size:14px;font-weight:700;padding:1px 10px;border-radius:6px;vertical-align:4px;margin-left:8px}
+sup{font-size:.62em;margin-left:1px}
+@media (max-width:520px){body{font-size:16px}.part>h2{font-size:23px}.topic>h3{font-size:20px}.box{padding:14px 16px}.box .row{flex-direction:column;gap:2px}.box .row .rk{width:auto}}
+
+/* quiz */
+.setup h2{font-size:19px;font-weight:800;margin:28px 0 10px}
+.lv{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.lv button{border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:12px 4px;text-align:center;line-height:1.4}
+.lv button b{display:block;font-size:22px;font-weight:800}
+.lv button small{color:var(--sub);font-size:12px}
+.lv button.on{border-color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:transparent;padding:6px 14px;border-radius:999px;font-size:15px}
+.chip.on{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+.start{display:block;width:100%;margin:28px 0 0;padding:16px;border:0;border-radius:14px;background:var(--ink);color:var(--bg);font-weight:800;font-size:17px}
+.start:disabled{opacity:.4}
+.stat{font-size:14px;color:var(--sub);margin:14px 0 0}
+.qtop{display:flex;justify-content:space-between;align-items:center;margin:24px 0 8px;font-size:15px;color:var(--sub)}
+.bar{height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin-bottom:22px}
+.bar div{height:100%;background:var(--ink);width:0;transition:width .25s}
+.tag{display:inline-block;font-size:13px;font-weight:700;padding:1px 9px;border-radius:6px;margin-right:6px;background:var(--card);color:var(--sub)}
+.tag.l상{background:var(--badge);color:#fff}
+.tag.l중{background:var(--mk);color:var(--mkink)}
+.qtext{font-size:19px;font-weight:700;margin:12px 0 16px;white-space:pre-line;line-height:1.65}
+.qbox{white-space:pre-line;background:var(--card);border-radius:14px;padding:14px 18px;margin:0 0 18px;font-size:16px}
+.opts{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.opts button{width:100%;text-align:left;border:1.5px solid var(--line);background:transparent;border-radius:14px;padding:13px 16px;display:flex;gap:10px;align-items:flex-start;font-size:16px;line-height:1.6}
+.opts button .n{flex:none;font-weight:800;width:1.3em}
+.opts button:disabled{cursor:default}
+.opts button.ok{border-color:var(--ok);background:var(--okbg)}
+.opts button.bad{border-color:var(--bad);background:var(--badbg)}
+.exp{margin-top:16px;padding:14px 18px;border-radius:14px;font-size:16px;display:none;background:var(--card)}
+.exp.show{display:block}
+.exp b{display:block;margin-bottom:4px}
+.exp.ok b{color:var(--ok)}.exp.bad b{color:var(--bad)}
+.next{margin-top:16px;width:100%;padding:15px;border:0;border-radius:14px;background:var(--ink);color:var(--bg);font-weight:800;font-size:16px;display:none}
+.next.show{display:block}
+.quit{border:0;background:none;color:var(--sub);font-size:14px;text-decoration:underline}
+.result{text-align:center;padding:40px 0 10px}
+.score{font-size:68px;font-weight:800;line-height:1}
+.score small{font-size:24px;color:var(--sub)}
+.result p{color:var(--sub)}
+.rrow{display:flex;gap:10px;margin-top:20px}
+.rrow button{flex:1;padding:14px;border-radius:14px;border:1.5px solid var(--ink);background:transparent;font-weight:700}
+.rrow button.main{background:var(--ink);color:var(--bg)}
+.empty{text-align:center;color:var(--sub);padding:50px 10px}
+.wn{background:var(--card);border-radius:14px;padding:16px 18px;margin:12px 0}
+.wn .q{font-weight:700;margin:8px 0;white-space:pre-line}
+.wn .a b{color:var(--ok)}
+.wn .e{font-size:15px;color:var(--sub);margin-top:4px}
+.wn .del{float:right;border:0;background:none;color:var(--sub);font-size:13px;text-decoration:underline}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>통합사회A</h1>
+  <p class="unit">Ⅳ. 세계화와 평화 1·2</p>
+  <button class="theme" id="themeBtn">테마</button>
+</header>
+
+<div class="view on" id="concept">
+  <div class="toolbar">
+    <button class="pill" id="hideBtn">형광펜 가리기</button>
+    <div class="legend"><span class="m">형광펜</span><span class="u">밑줄</span></div>
+    <button class="pill" id="openAll" hidden>모두 보기</button>
+  </div>
+  <div class="jump">
+    <a href="#s1">세계화</a><a href="#s2">지역화</a><a href="#s3">세계 도시</a><a href="#s4">다국적 기업</a><a href="#s5">빈부 격차</a><a href="#s6">문화 획일화</a><a href="#s7">보편·특수 윤리</a>
+  </div>
+
+  <section class="part">
+    <h2>■ 세계화의 다양한 양상</h2>
+    <p class="src">개념완성 108-115쪽 · 교과서 102-109쪽</p>
+    <h3 class="sub">(1) 세계화와 지역화</h3>
+
+    <div class="topic" id="s1">
+      <h4 class="tt">세계화</h4>
+      <div class="mean"><b>의미</b> — 지역 또는 국가 간 상호 의존성이 높아지면서 세계가 하나의 생활공간이 되어가는 현상</div>
+      <p class="lb">배경</p>
+      <p>( <span class="b">교통·통신</span> <span class="b">)의 발달</span>과 지역 간 상호 의존성 증가, *세계 무역 기구(<span class="b">WTO)의 출범</span>으로 상품, 서비스 등의 자유로운 이동 확대</p>
+      <p class="fn">*세계 무역 기구 : 1995년 1월 1일 출범한 국제기구로서 상품, 서비스, 지식 재산권 등 모든 교역 분야에서 자유무역 질서 확대하고자 함</p>
+      <p class="lb">양상</p>
+      <div class="box">
+        <div class="row"><div class="rk"><span class="b">경제의 세계화</span></div><div class="rv">지구적 차원의 <span class="u">협력과 분업</span>, 세계 <span class="u">도시</span> 성장, 다국적 <span class="u">기업</span>의 영향력 확대, 지역 간 <span class="u">경쟁</span> 심화</div></div>
+        <div class="row"><div class="rk"><span class="b">문화의 세계화</span></div><div class="rv">세계의 다양한 <span class="u">문화</span>의 활발한 교류, 인권, 자유, 평등과 같은 <span class="u">보편적 가치</span> 확산</div></div>
+      </div>
+      <p class="lb">영향</p>
+      <p><span class="b">국경의 의미 약화</span>, ( <span class="b">동질적</span> ) <span class="b">경관</span> 확산, 여러 국가에 걸친 *<span class="b">공간적 분업 증가</span></p>
+      <p class="fn">*공간적 분업 : 기업 조직의 여러 기능은 각 기능에 따라 입지 조건이 다르기 때문에 본사, 연구소, 생산 시설 등의 기능이 공간적으로 분리되어 입지함</p>
+      <div class="memo">
+        <p>1. 시공간 거리 단축</p>
+        <p>2. 이동거리 비용 감소</p>
+        <p>3. 국가간 인적·물적 교류 ↑</p>
+        <p>4. 상호의존성 ↑</p>
+        <p>→ 세계화 촉진</p>
+      </div>
+    </div>
+
+    <div class="topic" id="s2">
+      <h4 class="tt">지역화</h4>
+      <div class="mean"><b>의미</b> — 지역의 생활양식이나 경제·문화 활동 등이 세계적 차원에서 가치를 지니게 되는 현상</div>
+      <p class="lb">배경</p>
+      <p>세계화에 대응하기 위해 경제적·문화적 측면에서 다른 지역과 ( <span class="b">차별화</span> )하여 <span class="b">경쟁력</span>을 높이는 것이 필요함</p>
+      <p class="lb">양상</p>
+      <p>다양한 지역들이 <span class="u">세계적 차원에서 영향력을 확대</span>하고, <span class="u">고유한 정체성</span>을 바탕으로 세계적인 경쟁력을 갖추기 위해 노력</p>
+      <p class="lb"><span class="b">지역화 전략</span></p>
+      <div class="box">
+        <div class="row"><div class="rk"><span class="b">지리적 표시제</span></div><div class="rv">상품의 특성과 품질에 특정 지역의 기후·지형·토양 등 지리적 특성이 반영된 경우, <span class="u">해당 지역에서</span> 생산·제조·가공한 상품이라는 <span class="u">표시</span>를 할 수 있도록 인정 ex) <span class="u">콜롬비아 커피</span> 지역+상품명</div></div>
+        <div class="row"><div class="rk"><span class="b">장소 마케팅</span></div><div class="rv"><span class="u">지역의 특정 장소를 하나의 상품으로 인식</span>하여 매력적으로 보이도록 이미지와 시설 등을 개발 ex) 축제, 랜드마크 개발 '장소'를 상품으로 판매</div></div>
+        <div class="row"><div class="rk"><span class="b">지역 브랜드</span></div><div class="rv"><span class="u">특정 지역</span>에서 생산되는 상품·서비스·축제 등을 <span class="u">특별한 브랜드로 인식</span>시켜 지역 이미지를 높이고, <span class="u">지역 자체에 하나의 고유한 상표를 부여</span>하여 지역 경제를 활성화하는 전략 ex) I♡NY 지역을 브랜드로 인식</div></div>
+      </div>
+      <div class="box">
+        <p class="bt">▲ 세계의 주요 지리적 표시제 상품</p>
+        <p>더블린 아이리시 위스키 / 보르도·보졸레·부르고뉴 와인, 코냐크 증류주, 노르망디 카망베르(치즈), 바욘 햄 / 미텔라인·라인헤센·라인가우·모젤 와인, 뮌헨 맥주 / 레스보스 우조(증류주), 시티아 올리브유 / 키안티·토스카나·캄파니아 와인, 모차렐라 디 부팔라 캄파나(치즈), 시칠리아 오렌지 / 다르질링 차, 이카트·칸치푸람 실크, 카슈미르 캐시미어, 파시미나 숄 / 보성 벌교 꼬막, 보성 녹차, 양양 송이 / 아이다호 감자, 워싱턴 사과, 플로리다 오렌지, 비데일리아 양파, 나파밸리 와인 / 자메이카 블루마운틴 커피 / 콜롬비아 커피</p>
+      </div>
+      <div class="box">
+        <p class="bt">&lt;지리적 표시제&gt; &lt;장소 마케팅&gt; &lt;지역 브랜드&gt;</p>
+        <p>지리적 표시제: 우리나라 지리적 표시 등록 1호~30호 지도 (보성 녹차, 하동 녹차, 이천 쌀, 횡성 한우, 고창 복분자주, 제주 돼지고기 등)</p>
+        <p>장소 마케팅: 2026년 7월 지역별 축제 MAP</p>
+        <p>지역 브랜드: I♥NY, I amsterdam, I·SEOUL·U, Hi Seoul 등</p>
+      </div>
+    </div>
+
+    <h3 class="sub">(2) 세계 도시와 다국적 기업</h3>
+    <div class="topic" id="s3">
+      <h4 class="tt">세계도시</h4>
+      <div class="mean"><b>의미</b> — 국경을 넘어 정치·경제·문화 등 다양한 분야에서 <span class="u">세계적 중심지 역할</span>을 수행하는 도시</div>
+      <p class="lb">특성</p>
+      <p>① <b>정치적</b> : ( <span class="b">국제기구</span> )의 본부가 위치하거나 <span class="u">다양한 국제회의와 행사</span> 개최 ex) 국제 연합(UN)본부(뉴욕)</p>
+      <p>② <b>경제적</b> : ( <span class="b">다국적</span> )기업의 본사와 국제 금융 업무 기능을 담당하는 <span class="u">대형 금융기관 밀집</span>, 회계·법률·광고 등 전문화된 *( <span class="b">생산자 서비스업</span> )이 발달하여 전 세계의 자본과 정보 집중 ex) 뉴욕 증권 거래소</p>
+      <p class="fn">*생산자 서비스업 : 주로 금융·보험·부동산업, 회계 서비스, 연구 개발 등 <span class="u">기업을 대상으로 하는 서비스업</span></p>
+      <p>③ <b>문화적</b> : 인적·물적 교류가 활발하여 <span class="b">문화 활동의 중심축</span> 역할 ex) 뉴욕 <span class="u">브로드웨이</span></p>
+      <div class="box">
+        <p>- <b>세계도시</b> : 뉴욕, 런던, 도쿄, 파리 등</p>
+        <p>- <b>세계도시 선정기준</b></p>
+        <p>① <b>경제적 측면</b> : 다국적 기업의 본사 수, 금융 기관 수, 법률 회사 수 등</p>
+        <p>② <b>정치적 측면</b> : 국제회의 개최 수, 국제기구의 본부 수 등</p>
+        <p>③ <b>문화적 측면</b> : 세계적으로 유명한 문화·예술 기관, 영향력 있는 대중 매체, <span class="u">스포츠</span> 경기 및 시설, 교육 기관 등</p>
+        <p>④ <b>도시 기반 시설 측면</b> : 국제공항, 각종 편의 시설, 첨단 정보 통신 시스템 등의 구비 정도 등</p>
+        <p>- <b>세계도시 체계</b> : 도시의 규모와 기능 및 영향력에 따라 세계 도시 간 계층성이 형성되는 것</p>
+        <p>→ ( <span class="b">교통·통신</span> ) 기술의 발달로 세계 도시를 비롯한 수많은 지역이 <span class="u">다차원적으로 연결</span>됨 (<span class="u">계층성 강화</span>)</p>
+      </div>
+      <div class="box">
+        <p class="bt">▲ 세계 도시 체계 (휴먼 지오그래피, 2012)</p>
+        <p>● 최상위 세계 도시: 런던, 뉴욕, 도쿄 / □ 상위 세계 도시 / ○ 하위 세계 도시</p>
+      </div>
+    </div>
+
+    <div class="topic" id="s4">
+      <h4 class="tt">다국적 기업</h4>
+      <div class="mean"><b>의미</b> — 국경을 넘어 <span class="u">세계적으로 생산·<span class="b">판매</span> 활동을 하는 기업</span></div>
+      <p><span class="b">공간적 분업</span> : 기업 조직의 여러 기능은 각 기능에 따라 입지 조건이 다르기 때문에 본사, 연구소, 생산 시설 등의 기능이 공간적으로 분리되어 입지함</p>
+      <div class="box">
+        <div class="row"><div class="rk"><span class="b">본사</span></div><div class="rv">경영 기획·관리를 담당, 자본과 우수 인력 확보와 정보 수집에 용이한 <span class="b">본국의 대도시</span>에 입지</div></div>
+        <div class="row"><div class="rk"><span class="b">연구소</span></div><div class="rv">연구·개발을 담당, 핵심 기술 및 디자인 개발, 주로 <span class="b">대학 및 연구 시설이 밀집</span>하고 <span class="u">쾌적한 연구 환경</span>을 갖춘 곳에 입지</div></div>
+        <div class="row"><div class="rk"><span class="b">생산공장</span></div><div class="rv">생산 기능 담당, 생산비 절감을 위해 주로 <span class="b">저렴한 노동력</span>이 풍부한 <span class="b">개발도상국</span>에 입지, <span class="b">시장 확대</span>를 목적으로 <span class="b">무역 장벽을 극복</span>하기 위해 <span class="b">선진국</span>에 입지하기도 함</div></div>
+      </div>
+      <div class="box">
+        <p class="bt">&lt;다국적 기업의 성장&gt;</p>
+        <p>1단계 단일 공장 기업 → 2단계 국내 시장 침투 → 3단계 국외 영업 대리점 설치 → 4단계 국외 영업 지점 설치 → 5단계 국외 공장 설치</p>
+      </div>
+      <div class="box">
+        <p class="bt">&lt;OO 자동차의 공간적 분업&gt; (OO자동차, 2023)</p>
+        <p>본사: 한국 서울</p>
+        <p>연구소: 독일 프랑크푸르트, 미국 앤아버, 인도 하이데라바드, 일본 요코하마</p>
+        <p>공장: 체코 노소비체, 튀르키예 이즈미트, 인도 첸나이, 미국 몽고메리, 브라질 상파울루</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2>■ <span class="b">세계화</span>의 문제점과 해결방안</h2>
+    <p class="src">2. 세계화의 문제점과 해결방안</p>
+
+    <div class="topic" id="s5">
+      <h3 class="sub">(1) <span class="b">빈부 격차</span> 문제와 해결 방안</h3>
+      <p class="lb">현황</p>
+      <p>세계의 부는 증가하고 있지만 부의 대부분이 선진국 또는 소득 수준이 높은 계층에 집중하여 ( <span class="b">빈부격차</span> )가 확대됨</p>
+      <p class="lb">원인</p>
+      <ul class="dot">
+        <li>선진국은 부가 가치가 높은 ( <span class="b">금융 서비스업</span> )이나 <span class="b">첨단 기술 산업</span> 등에 집중하여 <span class="b">소득 수준이 높음</span><br>-&gt; ( <span class="b">첨단 기술 산업</span> )이고 부가 가치가 높은 제품 수출</li>
+        <li>개발도상국이나 저개발 국가는 값싼 노동력으로 부가 가치가 낮은 제조업이나 농업에 집중하여 소득 수준이 낮음<br>-&gt; 원료, 농산물 등 부가 가치가 낮은 제품 수출</li>
+      </ul>
+      <p class="lb">해결방안</p>
+      <ul class="dot">
+        <li>국제적 차원의 <span class="b">분배적 정의</span>를 실현</li>
+        <li>개발도상국이나 저개발 국가가 경제적으로 자립할 수 있도록 <span class="b">공적 개발 원조</span>, <span class="b">기술 이전</span> 등의 지원</li>
+        <li>( <span class="b">공정</span> ) <span class="b">무역, 공정 여행</span> 등 <span class="u">윤리적 소비 확대</span>, 다국적 기업에 <span class="b">공정한 세금 부과</span></li>
+      </ul>
+    </div>
+
+    <div class="topic" id="s6">
+      <h3 class="sub">(2) <span class="b">문화 획일화</span> 문제와 해결 방안</h3>
+      <p class="lb">현황</p>
+      <ul class="dot">
+        <li>선진국의 문화가 세계의 보편 문화로 자리 잡는 현상이 나타남</li>
+        <li>전통문화의 정체성이 약해지고 ( <span class="b">문화 다양성</span> <span class="b">)이 감소</span>함</li>
+        <li>소수 민족의 고유한 언어가 사라질 위기에 처하는 현상이 나타남</li>
+      </ul>
+      <p class="lb">원인</p>
+      <ul class="dot"><li>세계화로 문화를 ( <span class="b">상품화</span> )하고 이를 소비하는 수요자의 범위가 확대되면서 <span class="u">막대한 자본을 가진 선진국이 유리한 위치를 차지</span></li></ul>
+      <p class="lb">해결방안</p>
+      <ul class="dot">
+        <li>문화의 획일화를 경계하고 문화 <span class="b">다양성을 증진</span>하기 위해 노력</li>
+        <li>문화를 단순히 상품으로 소비하지 말고 그 지역 문화의 ( <span class="b">고유성</span> <span class="b">)을 인정</span>하고 보존하려는 태도</li>
+        <li>개인은 자국 문화의 정체성을 유지하며 <span class="u">외래문화를 능동적으로 수용해야 함</span></li>
+        <li><span class="b">유네스코가 채택한 문화 다양성 선언</span>과 같이 문화의 고유성과 다양성을 보존하기 위한 ( <span class="b">국제적</span> )협력 필요</li>
+      </ul>
+    </div>
+
+    <div class="topic" id="s7">
+      <h3 class="sub">(3) 보편 윤리와 특수 윤리 간에 갈등과 해결 방안</h3>
+      <p class="lb">현황</p>
+      <ul class="dot">
+        <li>국가 간, 지역 간 인구 이동과 문화 교류로 ( <span class="b">보편윤리</span> )와 ( <span class="b">특수윤리</span> ) 간에 갈등이 나타남<br>↑ 보편윤리: 인간의 존엄성, 자유, 인권 / ↑ 특수윤리: 관습법</li>
+        <li>자유와 평등 같은 보편적 가치를 중시해야 한다는 보편윤리와 관습법과 같이 특정한 집단 내에서 중요하다고 여기는 가치를 강조하는 특수 윤리의 입장 충돌</li>
+      </ul>
+      <p class="lb">원인</p>
+      <ul class="dot">
+        <li>세계화로 인간 존엄성 존중, 인권 보장 등의 보편 윤리가 전 세계로 확산됨</li>
+        <li>특정 사회에서 <span class="u">보편 윤리에 어긋나는 특수 윤리를 기반으로 한 행위로 문제가 발생</span>함</li>
+      </ul>
+      <p class="lb">해결방안</p>
+      <ul class="dot">
+        <li>보편 윤리 존중과 함께 특수 윤리를 ( <span class="b">성찰하는 태도</span> )를 가져야 함</li>
+        <li>한 사회의 문화를 그 사회 구성원의 입장에서 바라보고 이해하려는 태도를 지녀야 함 (문화 상대주의)</li>
+        <li>특수 윤리를 인정하되 인간의 존엄성이나 자유, 평등 등 인류의 보편 가치를 무시하는 행위까지 특수 윤리로 인정해서는 안 됨 (극단적 상대주의 X)</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<div class="view" id="quiz">
+  <div id="setup" class="setup">
+    <h2>난이도</h2>
+    <div class="lv" id="lvBox"></div>
+    <h2>단원</h2>
+    <div class="chips" id="topicBox"></div>
+    <h2>문제 수</h2>
+    <div class="chips" id="countBox"></div>
+    <button class="start" id="startBtn">풀기 시작</button>
+    <p class="stat" id="statLine"></p>
+  </div>
+  <div id="play" hidden>
+    <div class="qtop"><span id="qNum"></span><button class="quit" id="quitBtn">그만 풀기</button></div>
+    <div class="bar"><div id="barFill"></div></div>
+    <div id="qTags"></div>
+    <div class="qtext" id="qText"></div>
+    <div class="qbox" id="qBox" hidden></div>
+    <ul class="opts" id="opts"></ul>
+    <div class="exp" id="exp"></div>
+    <button class="next" id="nextBtn">다음 문제</button>
+  </div>
+  <div id="result" hidden>
+    <div class="result"><div class="score" id="scoreBig"></div><p id="scoreMsg"></p></div>
+    <div class="rrow"><button id="retryWrong">틀린 문제 다시</button><button class="main" id="backSetup">새로 풀기</button></div>
+  </div>
+</div>
+
+<div class="view" id="wrong">
+  <div class="toolbar">
+    <button class="chip" id="wrongQuiz">오답만 다시 풀기</button>
+    <button class="chip" id="wrongClear">오답 노트 비우기</button>
+  </div>
+  <div id="wrongList"></div>
+</div>
+</div>
+
+<nav class="tabs" role="tablist"><div class="in">
+  <button role="tab" aria-selected="true" data-v="concept">개념</button>
+  <button role="tab" aria-selected="false" data-v="quiz">문제</button>
+  <button role="tab" aria-selected="false" data-v="wrong">오답</button>
+</div></nav>
+<script>
+/* ---------- 문제 데이터 ---------- */
+const Q=[];let _id=0;
+function q(l,t,text,o,a,e,box){Q.push({id:++_id,l,t,text,o,a,e,box:box||''});}
+
+/* ===== 하 ===== */
+q('하','세계화','지역 또는 국가 간 상호 의존성이 높아지면서 세계가 하나의 생활공간이 되어 가는 현상은?',['지역화','세계화','도시화','산업화','정보화'],1,'세계화의 의미 그대로예요. 지역화는 지역의 생활양식이 세계적 가치를 지니게 되는 현상이에요.');
+q('하','세계화','세계화의 배경으로 보기 어려운 것은?',['교통·통신의 발달','세계 무역 기구(WTO)의 출범','지역 간 상호 의존성 증가','상품·서비스의 자유로운 이동 확대','국가 간 무역 장벽의 강화'],4,'무역 장벽이 강해지면 세계화는 오히려 느려져요. WTO는 자유 무역 질서를 확대하려고 출범했어요.');
+q('하','세계화','세계 무역 기구(WTO)가 출범한 시기는?',['1945년','1985년','1995년 1월 1일','2001년','2008년'],2,'WTO는 1995년 1월 1일에 출범했어요.');
+q('하','세계화','세계 무역 기구(WTO)에 대한 설명으로 옳은 것은?',['보호 무역을 강화하려고 만들어졌다','상품 교역만 다룬다','상품·서비스·지식 재산권 등 모든 교역 분야에서 자유 무역 질서를 확대하고자 한다','문화 다양성을 지키려고 유네스코가 세웠다','개발도상국에만 관세를 매기는 기구이다'],2,'WTO는 상품, 서비스, 지식 재산권 등 모든 교역 분야에서 자유 무역 질서 확대를 목표로 해요.');
+q('하','세계화','경제의 세계화 양상으로 보기 어려운 것은?',['지구적 차원의 협력과 분업','세계 도시의 성장','다국적 기업의 영향력 확대','지역 간 경쟁 심화','인권·자유·평등 같은 보편적 가치 확산'],4,'보편적 가치 확산은 문화의 세계화 양상이에요.');
+q('하','세계화','문화의 세계화 양상에 해당하는 것은?',['다국적 기업의 영향력 확대','세계 도시의 성장','세계의 다양한 문화의 활발한 교류','지역 간 경쟁 심화','지구적 차원의 분업'],2,'나머지는 모두 경제의 세계화 양상이에요.');
+q('하','세계화','세계화의 영향으로 옳지 않은 것은?',['국경의 의미가 약해진다','동질적 경관이 확산된다','여러 국가에 걸친 공간적 분업이 늘어난다','국가 간 인적·물적 교류가 줄어든다','지역 간 상호 의존성이 커진다'],3,'세계화가 되면 국가 간 인적·물적 교류는 늘어나요.');
+q('하','세계화','기업의 여러 기능이 입지 조건에 따라 본사·연구소·생산 시설로 나뉘어 따로 입지하는 것은?',['지역화','공간적 분업','장소 마케팅','지리적 표시제','세계 도시 체계'],1,'기능마다 입지 조건이 달라서 공간적으로 분리되어 입지하는 것을 공간적 분업이라고 해요.');
+q('하','지역화','지역의 생활양식이나 경제·문화 활동 등이 세계적 차원에서 가치를 지니게 되는 현상은?',['세계화','도시화','지역화','획일화','공간적 분업'],2,'지역화의 의미예요.');
+q('하','지역화','빈칸에 알맞은 말은?',['통합','차별화','획일화','동질화','표준화'],1,'세계화에 대응하려면 다른 지역과 차별화해서 경쟁력을 높여야 해요.','세계화에 대응하기 위해 경제적·문화적 측면에서 다른 지역과 (   )하여 경쟁력을 높이는 것이 필요하다.');
+q('하','지역화','상품의 품질이 특정 지역의 기후·지형·토양에서 비롯된 경우, 그 지역 상품이라는 표시를 인정하는 제도는?',['지역 브랜드','장소 마케팅','지리적 표시제','공정 무역','공적 개발 원조'],2,'지리적 표시제는 지리적 특성이 품질에 반영된 상품에 지역 표시를 인정하는 제도예요.');
+q('하','지역화','지역의 특정 장소를 하나의 상품으로 보고 매력적으로 보이도록 이미지와 시설을 개발하는 전략은?',['지리적 표시제','장소 마케팅','공간적 분업','문화 상대주의','세계 도시 체계'],1,'장소 마케팅은 \'장소\'를 상품처럼 판매하는 전략이에요. 축제, 랜드마크 개발이 예시예요.');
+q('하','지역화','\'I♡NY\'처럼 지역 자체에 고유한 상표를 붙여 지역 이미지를 높이는 전략은?',['지역 브랜드','지리적 표시제','공정 여행','장소 마케팅','생산자 서비스업'],0,'지역을 하나의 브랜드로 인식시키는 지역 브랜드 전략이에요.');
+q('하','지역화','지리적 표시제 상품의 예로 알맞은 것은?',['I amsterdam','지역별 축제 지도','보성 녹차','뉴욕 브로드웨이','국제 연합 본부'],2,'보성 녹차는 \'지역+상품명\' 형태의 지리적 표시제 상품이에요. I amsterdam은 지역 브랜드예요.');
+q('하','세계 도시','국경을 넘어 정치·경제·문화 등 여러 분야에서 세계적 중심지 역할을 하는 도시는?',['위성 도시','세계 도시','신도시','전원도시','산업 도시'],1,'세계 도시의 의미예요.');
+q('하','세계 도시','세계 도시의 정치적 특성에 해당하는 것은?',['국제기구의 본부가 위치한다','다국적 기업 본사가 밀집한다','증권 거래소가 있다','브로드웨이 같은 공연 중심지가 있다','대형 금융 기관이 모여 있다'],0,'국제기구 본부, 국제회의·행사 개최는 정치적 특성이에요.');
+q('하','세계 도시','빈칸에 알맞은 말은?',['중소','다국적','공','사회적','협동조합'],1,'세계 도시에는 다국적 기업 본사가 모여요.','세계 도시에는 (   ) 기업의 본사와 국제 금융 업무 기능을 담당하는 대형 금융 기관이 밀집해 있다.');
+q('하','세계 도시','생산자 서비스업에 해당하지 않는 것은?',['금융업','보험업','회계 서비스','연구 개발','동네 미용실'],4,'생산자 서비스업은 기업을 대상으로 하는 서비스업이에요. 미용실은 개인 소비자를 대상으로 해요.');
+q('하','세계 도시','세계 도시 체계 지도에서 최상위 세계 도시로 표시된 곳끼리 묶은 것은?',['서울·부산·인천','뉴욕·런던·도쿄','파리·로마·빈','시드니·요하네스버그·카라카스','홍콩·방콕·마닐라'],1,'지도에서 ●(최상위)로 표시된 곳은 뉴욕, 런던, 도쿄예요.');
+q('하','세계 도시','세계 도시의 문화적 특성을 보여 주는 예는?',['국제 연합(UN) 본부','뉴욕 증권 거래소','뉴욕 브로드웨이','다국적 기업 본사','국제공항'],2,'브로드웨이는 문화 활동의 중심축 역할을 보여 주는 예예요. UN 본부는 정치, 증권 거래소는 경제예요.');
+q('하','세계 도시','도시의 규모·기능·영향력에 따라 세계 도시 사이에 계층이 생기는 것은?',['세계 도시 체계','공간적 분업','지역화','도시 재생','장소 마케팅'],0,'세계 도시 체계는 세계 도시 간 계층성이 형성되는 것이에요.');
+q('하','다국적 기업','국경을 넘어 세계적으로 생산·판매 활동을 하는 기업은?',['다국적 기업','사회적 기업','공기업','1인 기업','벤처 기업'],0,'다국적 기업의 의미예요.');
+q('하','다국적 기업','다국적 기업의 본사가 주로 입지하는 곳은?',['저렴한 노동력이 풍부한 개발도상국','본국의 대도시','원료 산지','농촌 지역','무역 장벽이 높은 국가'],1,'본사는 자본·우수 인력 확보와 정보 수집이 쉬운 본국의 대도시에 입지해요.');
+q('하','다국적 기업','다국적 기업의 연구소가 주로 입지하는 곳은?',['원료 산지','노동력이 싼 지역','대학 및 연구 시설이 밀집하고 쾌적한 곳','항구 주변 공업 지역','교통이 불편한 산간 지역'],2,'연구소는 대학과 연구 시설이 모여 있고 연구 환경이 쾌적한 곳에 입지해요.');
+q('하','다국적 기업','생산비를 줄이기 위해 다국적 기업의 생산 공장이 주로 입지하는 곳은?',['본국의 대도시','대학이 밀집한 곳','저렴한 노동력이 풍부한 개발도상국','국제기구 본부가 있는 도시','금융 기관이 밀집한 곳'],2,'생산비 절감이 목적이면 저렴한 노동력이 풍부한 개발도상국으로 가요.');
+q('하','빈부 격차','부가 선진국이나 소득 수준이 높은 계층에 집중되어 나타나는 세계화의 문제는?',['문화 획일화','빈부 격차 확대','보편 윤리와 특수 윤리의 갈등','인구 고령화','도시 재생'],1,'세계의 부는 늘었지만 일부에 집중되어 빈부 격차가 커졌어요.');
+q('하','빈부 격차','생산자에게 정당한 대가를 지불하는 무역으로, 윤리적 소비의 대표적인 예는?',['보호 무역','중계 무역','공정 무역','가공 무역','자유 무역'],2,'공정 무역과 공정 여행은 윤리적 소비의 예예요.');
+q('하','빈부 격차','빈부 격차의 해결 방안으로 알맞지 않은 것은?',['국제적 차원의 분배적 정의 실현','공적 개발 원조','기술 이전','공정 여행','개발도상국 상품에 대한 관세 인상'],4,'관세를 올리면 개발도상국의 수출이 어려워져 격차가 더 커질 수 있어요.');
+q('하','문화 획일화','문화 획일화의 현황으로 옳지 않은 것은?',['선진국 문화가 보편 문화로 자리 잡는다','전통문화의 정체성이 약해진다','문화 다양성이 감소한다','소수 민족 언어가 사라질 위기에 처한다','지역 고유문화가 더욱 다양해진다'],4,'문화 획일화가 되면 문화 다양성은 줄어들어요.');
+q('하','문화 획일화','문화의 고유성과 다양성을 보존하기 위해 유네스코가 채택한 것은?',['세계 인권 선언','문화 다양성 선언','파리 협정','교토 의정서','몬트리올 의정서'],1,'유네스코의 문화 다양성 선언은 국제적 협력의 예예요.');
+q('하','보편·특수 윤리','인간 존엄성, 자유, 인권처럼 인류 모두가 중시해야 할 가치를 강조하는 윤리는?',['특수 윤리','보편 윤리','관습법','직업 윤리','생활 윤리'],1,'필기: 보편 윤리 = 인간의 존엄성, 자유, 인권.');
+q('하','보편·특수 윤리','관습법처럼 특정 집단 안에서 중요하다고 여기는 가치를 강조하는 윤리는?',['보편 윤리','생명 윤리','특수 윤리','정보 윤리','환경 윤리'],2,'필기: 특수 윤리 = 관습법.');
+q('하','보편·특수 윤리','한 사회의 문화를 그 사회 구성원의 입장에서 바라보고 이해하려는 태도는?',['자문화 중심주의','문화 사대주의','문화 상대주의','극단적 문화 상대주의','문화 획일화'],2,'필기에 적은 대로 문화 상대주의예요.');
+
+/* ===== 중 ===== */
+q('중','세계화','교통·통신의 발달이 세계화를 촉진한 과정으로 옳지 않은 것은?',['시공간 거리가 단축되었다','이동 거리에 따른 비용이 감소했다','국가 간 인적·물적 교류가 늘었다','지역 간 상호 의존성이 높아졌다','국가 간 이동 비용이 늘어 교류가 줄었다'],4,'필기: 시공간 거리 단축 → 이동 비용 감소 → 인적·물적 교류↑ → 상호 의존성↑');
+q('중','세계화','세계화의 영향인 \'동질적 경관 확산\'의 사례로 가장 알맞은 것은?',['지역마다 서로 다른 전통 가옥','세계 여러 도시에 비슷한 프랜차이즈 매장과 고층 빌딩이 들어섬','지역 축제를 새로 만듦','지리적 표시제 등록','소수 민족 언어 보존 운동'],1,'세계 어디서나 비슷한 모습이 나타나는 것이 동질적 경관이에요.');
+q('중','세계화','경제의 세계화와 문화의 세계화 양상을 바르게 짝지은 것은?',['경제: 보편적 가치 확산 / 문화: 다국적 기업 확대','경제: 세계 도시 성장 / 문화: 다양한 문화의 교류','경제: 인권 확산 / 문화: 지역 간 경쟁 심화','경제: 문화 교류 / 문화: 지구적 분업','경제: 평등 확산 / 문화: 협력과 분업'],1,'경제는 협력과 분업·세계 도시·다국적 기업·지역 간 경쟁, 문화는 문화 교류·보편적 가치 확산이에요.');
+q('중','세계화','WTO 출범이 세계화에 미친 영향으로 가장 알맞은 것은?',['국가 간 관세 장벽이 높아졌다','상품·서비스 등의 자유로운 이동이 확대되었다','국경의 의미가 강해졌다','국제 교역이 줄었다','지식 재산권은 교역 대상에서 빠졌다'],1,'WTO 출범으로 상품, 서비스 등의 자유로운 이동이 확대되었어요.');
+q('중','지역화','(가)~(다)에 해당하는 지역화 전략을 바르게 연결한 것은?',['(가) 지역 브랜드 (나) 장소 마케팅 (다) 지리적 표시제','(가) 지리적 표시제 (나) 장소 마케팅 (다) 지역 브랜드','(가) 장소 마케팅 (나) 지리적 표시제 (다) 지역 브랜드','(가) 지리적 표시제 (나) 지역 브랜드 (다) 장소 마케팅','(가) 지역 브랜드 (나) 지리적 표시제 (다) 장소 마케팅'],1,'지역+상품명은 지리적 표시제, 축제·랜드마크는 장소 마케팅, 도시 로고는 지역 브랜드예요.','(가) 보성 녹차, 다르질링 차\n(나) 지역 축제 개발, 랜드마크 조성\n(다) I amsterdam, I·SEOUL·U');
+q('중','지역화','지리적 표시제 상품 이름이 \'지역+상품명\' 형태인 이유로 가장 알맞은 것은?',['품질이 그 지역의 지리적 특성과 관련 있음을 보여 주려고','다국적 기업 본사 위치를 알리려고','세계 도시 순위를 표시하려고','공정 무역 상품임을 표시하려고','관세를 면제받으려고'],0,'기후·지형·토양 같은 지리적 특성이 품질에 반영된 상품이라는 뜻이에요.');
+q('중','지역화','지리적 표시제에 대한 설명으로 옳은 것은?',['어느 지역에서 생산해도 같은 표시를 쓸 수 있다','기후·지형·토양 같은 지리적 특성이 상품 품질에 반영되어야 한다','지역 축제를 개발하는 전략이다','도시 로고를 만드는 전략이다','세계화를 막으려고 무역을 금지하는 제도이다'],1,'해당 지역에서 생산·제조·가공한 상품이어야 하고, 지리적 특성이 품질에 반영되어야 해요.');
+q('중','지역화','장소 마케팅과 지역 브랜드에 대한 설명으로 옳은 것은?',['장소 마케팅은 장소를 상품처럼 매력적으로 꾸며 알리는 전략이다','지역 브랜드는 상품 원산지만 표시하는 제도이다','장소 마케팅은 다국적 기업의 공간적 분업이다','지역 브랜드는 지역 축제를 금지한다','둘 다 세계화와 관련이 없다'],0,'원산지 표시는 지리적 표시제예요. 장소 마케팅과 지역 브랜드는 세계화에 대응한 지역화 전략이에요.');
+q('중','지역화','세계화와 지역화의 관계로 가장 알맞은 것은?',['지역화는 세계화와 무관하게 나타난다','지역화는 세계화에 대응하여 지역의 고유성으로 세계적 경쟁력을 갖추려는 움직임이다','세계화가 진행되면 지역화는 사라진다','지역화는 국경을 강화하는 정책이다','지역화는 선진국에서만 나타난다'],1,'지역화의 배경은 \'세계화에 대응\'하기 위한 차별화예요.');
+q('중','지역화','지역화의 양상으로 옳지 않은 것은?',['고유한 정체성을 바탕으로 경쟁력을 갖추려 한다','세계적 차원에서 영향력을 넓히려 한다','지역 축제를 개발한다','지역 이미지를 높이는 상표를 만든다','다른 지역과 똑같아지도록 지역 특색을 없앤다'],4,'지역화는 차별화가 핵심이에요. 특색을 없애는 건 반대 방향이에요.');
+q('중','세계 도시','세계 도시 선정 기준과 그 측면을 바르게 짝지은 것은?',['국제공항 – 정치적 측면','국제기구 본부 수 – 경제적 측면','법률 회사 수 – 경제적 측면','스포츠 경기 및 시설 – 도시 기반 시설 측면','국제회의 개최 수 – 문화적 측면'],2,'경제: 다국적 기업 본사·금융 기관·법률 회사 수 / 정치: 국제회의·국제기구 / 문화: 문화·예술 기관, 대중 매체, 스포츠, 교육 / 기반 시설: 국제공항, 편의 시설, 정보 통신.');
+q('중','세계 도시','\'도시 기반 시설 측면\'의 세계 도시 선정 기준은?',['다국적 기업 본사 수','국제회의 개최 수','영향력 있는 대중 매체','첨단 정보 통신 시스템','금융 기관 수'],3,'국제공항, 각종 편의 시설, 첨단 정보 통신 시스템이 도시 기반 시설 측면이에요.');
+q('중','세계 도시','교통·통신 기술의 발달이 세계 도시 체계에 준 영향으로 옳은 것은?',['세계 도시 간 계층성이 사라졌다','수많은 지역이 다차원적으로 연결되며 계층성이 강화되었다','세계 도시끼리만 연결되고 다른 지역은 고립되었다','모든 도시의 영향력이 같아졌다','세계 도시의 수가 줄었다'],1,'학습지: 다차원적으로 연결됨 (계층성 강화). \'약화\'로 바꿔 내는 함정에 주의!');
+q('중','세계 도시','세계 도시의 경제적 특성을 설명한 것으로 옳은 것은?',['국제기구 본부가 있다','생산자 서비스업이 발달해 전 세계의 자본과 정보가 모인다','브로드웨이 같은 문화 중심지가 있다','1차 산업 비중이 높다','저렴한 노동력을 바탕으로 공장이 모인다'],1,'회계·법률·광고 등 생산자 서비스업이 발달해 자본과 정보가 집중돼요.');
+q('중','세계 도시','생산자 서비스업의 특징으로 옳은 것은?',['주로 개인 소비자를 대상으로 한다','주로 기업을 대상으로 한다','농업과 어업이 중심이다','세계 도시보다 농촌에 많다','음식·숙박업이 대표적이다'],1,'금융·보험·부동산, 회계, 연구 개발처럼 기업을 대상으로 하는 서비스업이에요.');
+q('중','세계 도시','뉴욕의 시설과 세계 도시의 특성을 잘못 연결한 것은?',['UN 본부 – 정치적 특성','뉴욕 증권 거래소 – 경제적 특성','브로드웨이 – 문화적 특성','다국적 기업 본사 – 경제적 특성','국제회의 개최 – 문화적 특성'],4,'국제회의 개최는 정치적 특성이에요.');
+q('중','다국적 기업','다국적 기업의 성장 단계를 순서대로 바르게 나열한 것은?',['ㄴ-ㄹ-ㅁ-ㄱ-ㄷ','ㄴ-ㅁ-ㄹ-ㄱ-ㄷ','ㄹ-ㄴ-ㅁ-ㄱ-ㄷ','ㄴ-ㄹ-ㄱ-ㅁ-ㄷ','ㄴ-ㄹ-ㅁ-ㄷ-ㄱ'],0,'단일 공장 기업 → 국내 시장 침투 → 국외 영업 대리점 → 국외 영업 지점 → 국외 공장.','ㄱ. 국외 영업 지점 설치\nㄴ. 단일 공장 기업\nㄷ. 국외 공장 설치\nㄹ. 국내 시장 침투\nㅁ. 국외 영업 대리점 설치');
+q('중','다국적 기업','다국적 기업 성장 과정의 마지막 단계(5단계)는?',['단일 공장 기업','국내 시장 침투','국외 영업 대리점 설치','국외 영업 지점 설치','국외 공장 설치'],4,'5단계는 국외 공장 설치예요.');
+q('중','다국적 기업','다국적 기업이 선진국에 생산 공장을 세우는 주된 이유는?',['저렴한 노동력 확보','원료 확보','시장 확대와 무역 장벽 극복','본사 기능 강화','연구 인력 감소'],2,'시장 확대를 목적으로 무역 장벽을 극복하기 위해 선진국에 공장을 세우기도 해요.');
+q('중','다국적 기업','OO 자동차의 공간적 분업 지도에 대한 설명으로 옳은 것은?',['본사는 미국 앤아버에 있다','본사는 한국 서울에 있다','체코 노소비체에는 연구소가 있다','독일 프랑크푸르트에는 공장이 있다','인도 첸나이에는 본사가 있다'],1,'본사 서울, 프랑크푸르트는 연구소, 노소비체·첸나이는 공장이에요.');
+q('중','다국적 기업','OO 자동차 지도에서 미국의 두 시설을 바르게 짝지은 것은?',['앤아버 – 공장 / 몽고메리 – 연구소','앤아버 – 연구소 / 몽고메리 – 공장','앤아버 – 본사 / 몽고메리 – 공장','앤아버 – 연구소 / 몽고메리 – 연구소','앤아버 – 본사 / 몽고메리 – 본사'],1,'앤아버는 ●연구소, 몽고메리는 ○공장이에요.');
+q('중','다국적 기업','다국적 기업 본사가 본국의 대도시에 입지하는 이유로 알맞은 것은?',['노동력이 저렴해서','넓고 값싼 땅이 많아서','자본과 우수 인력 확보, 정보 수집이 쉬워서','무역 장벽을 피하려고','원료 산지와 가까워서'],2,'본사는 경영 기획·관리를 맡기 때문에 자본·인력·정보가 중요해요.');
+q('중','빈부 격차','빈부 격차의 원인에 대한 설명으로 옳은 것은?',['선진국은 부가 가치가 낮은 농업에 집중한다','개발도상국은 첨단 기술 제품을 주로 수출한다','선진국은 부가 가치가 높은 서비스업·첨단 기술 산업에 집중해 소득이 높다','개발도상국은 금융 서비스업 중심이다','원료 수출은 부가 가치가 높다'],2,'선진국은 고부가 가치 산업, 개발도상국은 저부가 가치 제조업·농업에 집중해요.');
+q('중','빈부 격차','개발도상국이나 저개발 국가가 주로 수출하는 것은?',['첨단 기술 제품','금융 상품','원료·농산물','특허 기술','고급 서비스'],2,'원료, 농산물 등 부가 가치가 낮은 제품을 수출해요.');
+q('중','빈부 격차','개발도상국의 경제적 자립을 돕는 방안끼리 묶은 것은?',['공적 개발 원조, 기술 이전','관세 인상, 수입 금지','기술 이전 금지, 원조 중단','보호 무역, 특허 독점','원조 중단, 관세 인상'],0,'공적 개발 원조와 기술 이전이 학습지에 나온 자립 지원 방안이에요.');
+q('중','빈부 격차','다국적 기업과 관련한 빈부 격차 해결 방안으로 알맞은 것은?',['다국적 기업에 공정한 세금 부과','다국적 기업의 세금 면제 확대','다국적 기업의 공장 이전 금지','현지 노동자 임금 동결','본사를 조세 회피 지역으로 이전'],0,'학습지: 다국적 기업에 공정한 세금 부과.');
+q('중','문화 획일화','문화 획일화의 원인으로 옳은 것은?',['문화가 상품화되고 소비 범위가 넓어지며 자본이 많은 선진국이 유리해졌다','국가 간 교류가 끊겼다','개발도상국 문화 산업이 가장 크다','소수 민족 언어 사용자가 늘었다','교통·통신이 쇠퇴했다'],0,'문화의 상품화 + 막대한 자본을 가진 선진국의 우위가 원인이에요.');
+q('중','문화 획일화','문화 획일화를 막기 위한 개인의 태도로 알맞은 것은?',['외래문화를 무조건 거부한다','외래문화를 비판 없이 받아들인다','자국 문화의 정체성을 지키며 외래문화를 능동적으로 수용한다','전통문화를 버린다','문화를 상품으로만 소비한다'],2,'정체성 유지 + 능동적 수용이 핵심이에요.');
+q('중','문화 획일화','빈칸에 알맞은 말은?',['보편성','고유성','획일성','상품성','경제성'],1,'지역 문화의 고유성을 인정하고 보존하려는 태도가 필요해요.','문화를 단순히 상품으로 소비하지 말고 그 지역 문화의 (   )을 인정하고 보존하려는 태도가 필요하다.');
+q('중','문화 획일화','유네스코 문화 다양성 선언처럼 문화의 고유성과 다양성을 지키기 위해 필요한 협력은?',['개인적 협력','국제적 협력','가족 단위 협력','기업 내부 협력','지역 내부 협력'],1,'학습지 빈칸 정답: 국제적 협력.');
+q('중','보편·특수 윤리','보편 윤리와 특수 윤리 간 갈등이 나타나는 배경으로 알맞은 것은?',['국가 간·지역 간 인구 이동과 문화 교류 확대','국가 간 교류 감소','국경 강화','WTO 해체','문화 다양성 증가로 갈등 소멸'],0,'인구 이동과 문화 교류로 서로 다른 윤리가 만나면서 갈등이 생겨요.');
+q('중','보편·특수 윤리','보편 윤리와 특수 윤리 간 갈등의 해결 방안으로 옳은 것은?',['특수 윤리라면 무엇이든 인정한다','보편 윤리를 존중하면서 특수 윤리를 성찰하는 태도를 가진다','특수 윤리를 모두 금지한다','자기 문화를 기준으로 다른 문화를 판단한다','보편 윤리를 무시한다'],1,'학습지 빈칸 정답: 성찰하는 태도.');
+q('중','보편·특수 윤리','특수 윤리를 인정할 때의 한계로 옳은 것은?',['인간 존엄성이나 자유·평등을 무시하는 행위까지 특수 윤리로 인정해서는 안 된다','관습이면 모두 인정해야 한다','다수가 찬성하면 인정해야 한다','경제적 이익이 크면 인정해야 한다','오래된 전통이면 인정해야 한다'],0,'필기: 극단적 상대주의 X.');
+q('중','보편·특수 윤리','극단적 문화 상대주의에 해당하는 주장은?',['모든 문화는 그 사회의 맥락에서 이해해야 한다','인권을 침해하는 관습도 그 사회의 문화이니 존중해야 한다','보편 가치는 존중해야 한다','다른 문화도 성찰할 필요가 있다','문화 다양성은 중요하다'],1,'보편 가치를 침해하는 것까지 인정하면 극단적 문화 상대주의예요.');
+q('중','지역화','세계화와 지역화에 대한 설명으로 옳지 않은 것은?',['세계화로 국경의 의미가 약해진다','지역화는 지역의 고유성을 바탕으로 한다','지리적 표시제는 지역화 전략이다','세계화는 교통·통신 발달로 촉진되었다','지역화가 진행되면 지역 간 경쟁이 사라진다'],4,'지역화는 경쟁력을 높이려는 움직임이라 경쟁이 사라지지 않아요. 세계화 양상에도 지역 간 경쟁 심화가 있어요.');
+
+/* ===== 상 ===== */
+q('상','세계화','<보기>에서 세계화의 영향으로 옳은 것만 고른 것은?',['ㄱ, ㄴ','ㄱ, ㄷ','ㄴ, ㄷ','ㄴ, ㄹ','ㄷ, ㄹ'],0,'ㄷ 공간적 분업은 증가, ㄹ 상호 의존성도 증가해요.','ㄱ. 국경의 의미가 약해진다.\nㄴ. 동질적 경관이 확산된다.\nㄷ. 여러 국가에 걸친 공간적 분업이 감소한다.\nㄹ. 지역 간 상호 의존성이 낮아진다.');
+q('상','다국적 기업','다음 사례와 가장 관련 깊은 개념과, 그 개념이 나타나는 이유를 바르게 짝지은 것은?',['지역화 – 지역의 고유성을 살리려고','공간적 분업 – 기능마다 입지 조건이 달라서','장소 마케팅 – 장소를 상품화하려고','세계 도시 체계 – 도시 간 계층이 있어서','문화 획일화 – 문화가 상품화되어서'],1,'본사·연구소·공장이 기능에 따라 나뉘어 입지하는 공간적 분업이에요.','A국의 △△기업은 본사를 자국 수도에, 연구소를 대학이 밀집한 B국 도시에, 생산 공장을 임금이 낮은 C국에 두었다.');
+q('상','지역화','다음 학생들의 발표 중 옳지 않은 내용을 말한 학생은?',['갑','을','병','정','무'],3,'지리적 표시제는 기후·지형·토양 등 지리적 특성이 품질에 반영되어야 해요. 유명하기만 해서는 안 돼요.','갑: 지리적 표시제는 해당 지역에서 생산·가공한 상품임을 표시하게 해 줘.\n을: 장소 마케팅은 축제나 랜드마크로 장소를 상품처럼 알리는 거야.\n병: 지역 브랜드는 지역 자체에 고유한 상표를 붙이는 전략이야.\n정: 지리적 표시제는 지형·기후와 상관없이 유명한 상품이면 등록할 수 있어.\n무: 세 가지 모두 지역 경쟁력을 높이려는 지역화 전략이야.');
+q('상','지역화','<보기>에서 옳은 것만 고른 것은?',['ㄱ, ㄴ','ㄱ, ㄷ','ㄴ, ㄷ','ㄱ, ㄴ, ㄹ','ㄴ, ㄷ, ㄹ'],3,'ㄷ은 지리적 표시제에 대한 설명이에요.','ㄱ. 지역화는 세계화에 대응하는 과정에서 나타난다.\nㄴ. 지역화 전략은 다른 지역과의 차별화를 추구한다.\nㄷ. 지역 브랜드는 상품 품질에 반영된 지리적 특성을 인정하는 제도이다.\nㄹ. 지역 축제 개발은 장소 마케팅의 예이다.');
+q('상','세계 도시','(가), (나) 도시에 대한 설명으로 옳은 것은?',['(가)는 (나)보다 생산자 서비스업 비중이 낮다','(가)는 (나)보다 세계 도시 체계에서 상위 계층이다','(나)는 (가)보다 다국적 기업 본사가 많다','두 도시는 계층 차이가 없다','(나)가 (가)보다 국제적 영향력이 크다'],1,'영향력이 전 세계에 미치는 (가)가 상위 계층이에요.','(가) 다국적 기업 본사와 대형 금융 기관이 매우 많고, 국제기구 본부가 있으며 영향력이 전 세계에 미친다.\n(나) 주변 국가 정도에 영향을 미치는 하위 세계 도시이다.');
+q('상','세계 도시','<보기>에서 세계 도시에 대한 설명으로 옳은 것만 고른 것은?',['ㄱ, ㄴ','ㄴ, ㄹ','ㄱ, ㄷ, ㄹ','ㄱ, ㄴ, ㄷ','ㄴ, ㄷ, ㄹ'],2,'ㄴ: 교통·통신 발달로 계층성은 강화되었어요.','ㄱ. 세계 도시 사이에는 계층성이 나타난다.\nㄴ. 교통·통신 기술의 발달로 계층성이 약화되었다.\nㄷ. 회계·법률·광고 등 생산자 서비스업이 발달한다.\nㄹ. 국제공항과 첨단 정보 통신 시스템도 선정 기준이 된다.');
+q('상','세계 도시','A~D 지표를 세계 도시 선정 기준의 측면과 바르게 연결한 것은?',['A 정치 · B 경제 · C 문화 · D 기반 시설','A 경제 · B 문화 · C 정치 · D 기반 시설','A 기반 시설 · B 정치 · C 문화 · D 경제','A 경제 · B 정치 · C 문화 · D 기반 시설','A 경제 · B 정치 · C 기반 시설 · D 문화'],3,'기업·금융은 경제, 국제회의는 정치, 문화·예술 기관은 문화, 국제공항은 기반 시설이에요.','A: 다국적 기업 본사 수, 금융 기관 수\nB: 국제회의 개최 수\nC: 세계적으로 유명한 문화·예술 기관\nD: 국제공항, 첨단 정보 통신 시스템');
+q('상','다국적 기업','다국적 기업 성장 단계 그림에서 4단계와 5단계를 구분하는 가장 큰 차이는?',['국외에 생산 공장을 세우는지 여부','국내 시장에 진출했는지 여부','본사를 세웠는지 여부','영업 대리점을 설치했는지 여부','무역 장벽이 생겼는지 여부'],0,'4단계는 국외 영업 지점, 5단계는 국외 공장 설치예요.');
+q('상','다국적 기업','OO 자동차의 공간적 분업 지도에 대한 <보기>의 설명 중 옳은 것만 고른 것은?',['ㄱ, ㄴ','ㄱ, ㄷ','ㄱ, ㄴ, ㄷ','ㄴ, ㄷ, ㄹ','ㄱ, ㄴ, ㄷ, ㄹ'],2,'미국 몽고메리에도 공장이 있으니 ㄹ은 틀려요. 선진국에도 시장 확대·무역 장벽 극복을 위해 공장을 세워요.','ㄱ. 본사는 한국 서울에 있다.\nㄴ. 연구소는 독일, 미국, 인도, 일본 등에 있다.\nㄷ. 체코, 튀르키예, 브라질에는 공장이 있다.\nㄹ. 공장은 모두 개발도상국에만 있다.');
+q('상','다국적 기업','다국적 기업의 기능과 입지를 연결한 것으로 옳지 않은 것은?',['본사 – 정보 수집이 쉬운 본국의 대도시','연구소 – 대학·연구 시설이 밀집한 지역','생산 공장 – 저렴한 노동력이 풍부한 개발도상국','생산 공장 – 무역 장벽 극복을 위한 선진국','연구소 – 노동력이 가장 싼 농촌 지역'],4,'연구소는 쾌적한 연구 환경과 연구 시설이 중요해요.');
+q('상','다국적 기업','다음 사례에 대한 설명으로 옳은 것은?',['생산비 절감을 위해 개발도상국에 공장을 세운 사례다','시장 확대와 무역 장벽 극복을 위해 선진국에 공장을 세운 사례다','연구소 입지 사례다','본사 이전 사례다','지리적 표시제 사례다'],1,'관세(무역 장벽)를 피하고 시장을 넓히려는 목적이에요.','△△전자는 미국의 높은 관세를 피하고 미국 시장 점유율을 높이기 위해 미국 현지에 생산 공장을 세웠다.');
+q('상','빈부 격차','다음 자료를 분석한 것으로 옳은 것은?',['A국은 부가 가치가 낮은 제품을 수출한다','B국은 부가 가치가 높은 제품을 수출해 소득이 높다','이러한 무역 구조가 국가 간 빈부 격차 확대의 원인이 된다','B국은 첨단 기술 산업에 집중한다','무역 구조는 빈부 격차와 관련이 없다'],2,'고부가 가치 제품 수출국과 원료·농산물 수출국의 소득 차이가 빈부 격차로 이어져요.','A국(선진국): 반도체, 금융 서비스 수출\nB국(개발도상국): 커피 원두, 광물 수출');
+q('상','빈부 격차','<보기>에서 빈부 격차 해결 방안으로 옳은 것만 고른 것은?',['ㄱ, ㄴ','ㄷ, ㄹ','ㄱ, ㄴ, ㄷ','ㄱ, ㄴ, ㄹ','ㄴ, ㄷ, ㄹ'],3,'기술 이전은 \'지원\'해야 하는 방안이에요. 제한하면 안 돼요.','ㄱ. 공적 개발 원조\nㄴ. 공정 여행\nㄷ. 개발도상국으로의 기술 이전 제한\nㄹ. 다국적 기업에 공정한 세금 부과');
+q('상','빈부 격차','다음 갑의 행동과 가장 관련 있는 것은?',['윤리적 소비 – 공정 무역, 공정 여행','과시 소비','보호 무역','장소 마케팅','문화 사대주의'],0,'생산자에게 정당한 대가가 가는 소비, 현지인에게 이익이 돌아가는 여행은 윤리적 소비예요.','갑은 생산자에게 정당한 대가가 돌아가는 커피를 사고, 여행할 때는 현지 주민이 운영하는 숙소와 식당을 이용했다.');
+q('상','빈부 격차','\'국제적 차원의 분배적 정의 실현\'의 의미로 가장 알맞은 것은?',['세계의 부와 혜택이 공정하게 나뉘도록 국제 사회가 노력하는 것','선진국이 이익을 모두 갖는 것','모든 국가가 같은 산업을 갖는 것','국가 간 무역을 중단하는 것','개발도상국에만 세금을 부과하는 것'],0,'빈부 격차를 줄이려면 국제 사회 차원에서 공정한 분배를 고민해야 해요.');
+q('상','문화 획일화','다음 현상의 원인과 해결 방안을 바르게 연결한 것은?',['원인: 문화 교류 감소 / 해결: 교류 중단','원인: 문화의 상품화와 선진국 자본의 우위 / 해결: 문화 다양성 증진과 국제적 협력','원인: 지리적 표시제 / 해결: 제도 폐지','원인: 보편 윤리 확산 / 해결: 특수 윤리 강화','원인: 빈부 격차 / 해결: 공적 개발 원조만 실시'],1,'문화 획일화 현상이에요. 원인은 상품화와 자본의 우위, 해결은 다양성 증진과 국제적 협력이에요.','어느 나라 영화관에서 상영되는 영화 대부분이 할리우드 영화이고, 젊은 세대는 전통 음악을 거의 듣지 않는다. 일부 소수 민족 언어는 사용자가 거의 남아 있지 않다.');
+q('상','문화 획일화','<보기>에서 문화 획일화에 대한 설명으로 옳은 것만 고른 것은?',['ㄱ, ㄴ','ㄱ, ㄷ','ㄴ, ㄷ','ㄴ, ㄹ','ㄷ, ㄹ'],1,'ㄴ 다양성은 감소, ㄹ 무조건 차단이 아니라 능동적 수용이 바람직해요.','ㄱ. 전통문화의 정체성이 약해진다.\nㄴ. 문화 다양성이 증가한다.\nㄷ. 유네스코의 문화 다양성 선언은 해결 노력의 예이다.\nㄹ. 외래문화를 무조건 차단하는 것이 바람직하다.');
+q('상','문화 획일화','학습지의 해결 방안에 가장 가까운 입장을 가진 학생은?',['갑','을','병','갑과 병','갑, 을, 병 모두'],1,'자국 문화 정체성 유지 + 외래문화의 능동적 수용이 교과서 입장이에요.','갑: 외래문화를 받아들이면 우리 문화가 사라지니 막아야 해.\n을: 우리 정체성은 지키면서 좋은 외래문화는 주체적으로 받아들여야 해.\n병: 세계적으로 인기 있는 문화만 따라가면 돼.');
+q('상','보편·특수 윤리','다음 사례에 대한 판단으로 가장 알맞은 것은?',['전통이므로 무조건 존중해야 한다','특수 윤리를 인정하되 인간 존엄성·평등을 침해하는 관습까지 인정해서는 안 된다','그 사회의 문제이므로 관심 가질 필요가 없다','자국 문화를 기준으로 그 사회 문화 전체를 부정해야 한다','보편 윤리는 일부 지역에만 적용된다'],1,'극단적 상대주의 X. 보편 가치를 무시하는 행위는 특수 윤리로 인정할 수 없어요.','어떤 지역에는 전통이라는 이유로 여성의 교육을 금지하는 관습이 있다.');
+q('상','보편·특수 윤리','<보기>에서 옳은 것만 고른 것은?',['ㄱ, ㄴ','ㄷ, ㄹ','ㄱ, ㄴ, ㄷ','ㄱ, ㄴ, ㄹ','ㄴ, ㄷ, ㄹ'],3,'문화 상대주의는 맥락에서 이해하는 태도이지, 모든 관습을 무조건 인정하는 게 아니에요.','ㄱ. 세계화로 보편 윤리가 전 세계로 확산되었다.\nㄴ. 특수 윤리는 관습법처럼 특정 집단 내의 가치를 강조한다.\nㄷ. 문화 상대주의는 모든 관습을 무조건 인정하는 태도이다.\nㄹ. 보편 윤리를 존중하면서 특수 윤리를 성찰해야 한다.');
+q('상','보편·특수 윤리','문화 상대주의와 극단적 문화 상대주의를 구분한 설명으로 옳은 것은?',['둘 다 인권 침해 관습을 인정한다','문화 상대주의는 맥락을 이해하는 태도이고, 극단적 상대주의는 보편 가치 침해까지 인정하는 문제가 있다','문화 상대주의는 자기 문화가 우월하다고 본다','극단적 상대주의가 바람직한 태도이다','둘 다 문화 획일화의 원인이다'],1,'필기: (문화 상대주의) ↔ (극단적 상대주의 X)');
+q('상','세계화','세계화의 문제점과 해결 방안을 바르게 연결한 것은?',['빈부 격차 – 문화 다양성 선언','문화 획일화 – 공적 개발 원조','보편·특수 윤리 갈등 – 특수 윤리를 성찰하는 태도','빈부 격차 – 외래문화 차단','문화 획일화 – 다국적 기업 세금 면제'],2,'빈부 격차는 ODA·기술 이전·공정 무역, 문화 획일화는 다양성 증진·국제적 협력이에요.');
+q('상','세계화','세계화의 양상과 영향을 분석한 것으로 옳지 않은 것은?',['세계 도시 성장은 경제의 세계화 양상이다','보편적 가치 확산은 문화의 세계화 양상이다','공간적 분업 증가는 세계화의 영향이다','동질적 경관 확산은 세계화의 영향이다','지리적 표시제는 세계화로 지역 특색이 사라진 결과이다'],4,'지리적 표시제는 지역 특색을 살리는 지역화 전략이에요.');
+q('상','세계 도시','세계 도시와 다국적 기업의 관계에 대한 설명으로 옳은 것은?',['세계 도시에는 다국적 기업의 생산 공장이 주로 모인다','다국적 기업 본사가 모이는 것은 세계 도시의 경제적 특성이다','세계 도시에는 생산자 서비스업이 거의 없다','다국적 기업은 세계 도시와 관련이 없다','세계 도시는 저임금 노동력이 풍부한 곳이다'],1,'본사는 대도시(세계 도시)에, 공장은 주로 개발도상국에 입지해요.');
+q('상','세계화','<보기>에서 옳은 것만 고른 것은?',['ㄱ, ㄷ','ㄴ, ㄷ','ㄱ, ㄴ, ㄹ','ㄱ, ㄷ, ㄹ','ㄴ, ㄷ, ㄹ'],2,'세계화로 지역 간 경쟁은 심화돼요.','ㄱ. WTO는 1995년에 출범하였다.\nㄴ. WTO는 지식 재산권 분야의 교역도 다룬다.\nㄷ. 세계화로 지역 간 경쟁이 약화되었다.\nㄹ. 교통·통신의 발달은 세계화의 배경이다.');
+q('상','세계 도시','세계 도시 체계 지도를 분석한 것으로 옳은 것은?',['최상위 세계 도시는 뉴욕, 런던, 도쿄이다','세계 도시는 모두 북반구에만 있다','세계 도시끼리는 서로 연결되어 있지 않다','도쿄는 하위 세계 도시이다','요하네스버그는 최상위 세계 도시이다'],0,'시드니·상파울루·요하네스버그처럼 남반구에도 세계 도시가 있어요. 도시들은 선으로 연결되어 있어요.');
+
+/* ---------- 상태 ---------- */
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let wrongIds=store.get('tsA_wrong',[]);
+let stats=store.get('tsA_stats',{solved:0,correct:0});
+const TOPICS=['세계화','지역화','세계 도시','다국적 기업','빈부 격차','문화 획일화','보편·특수 윤리'];
+let sel={lv:'전체',topics:new Set(TOPICS),count:20};
+let run=null;
+
+/* ---------- 탭 ---------- */
+document.querySelectorAll('nav.tabs button').forEach(b=>b.onclick=()=>show(b.dataset.v));
+function show(v){
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===v));
+  document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id===v));
+  if(v==='wrong')renderWrong();
+  if(v==='quiz'&&!run)renderSetup();
+  window.scrollTo(0,0);
+}
+
+/* ---------- 개념 ---------- */
+document.querySelectorAll('.b').forEach(el=>{
+  const t=()=>el.classList.toggle('open');
+  el.addEventListener('click',t);
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}});
+});
+const hideBtn=document.getElementById('hideBtn');
+hideBtn.onclick=()=>{
+  const on=document.body.classList.toggle('hide');
+  hideBtn.classList.toggle('on',on);
+  hideBtn.textContent=on?'형광펜 보이기':'형광펜 가리기';
+  document.getElementById('openAll').hidden=!on;
+  document.querySelectorAll('.b').forEach(x=>x.classList.remove('open'));
+};
+document.getElementById('openAll').onclick=()=>document.querySelectorAll('.b').forEach(x=>x.classList.add('open'));
+document.querySelectorAll('.b').forEach(x=>{if(!x.hasAttribute('tabindex'))x.setAttribute('tabindex','0')});
+
+/* ---------- 테마 ---------- */
+const themeBtn=document.getElementById('themeBtn');
+let theme=store.get('tsA_theme','');
+function applyTheme(){if(theme)document.documentElement.dataset.theme=theme;else delete document.documentElement.dataset.theme;themeBtn.textContent=theme==='dark'?'밝게':theme==='light'?'어둡게':'테마'}
+themeBtn.onclick=()=>{const dark=theme?theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;theme=dark?'light':'dark';store.set('tsA_theme',theme);applyTheme()};
+applyTheme();
+
+/* ---------- 문제 설정 ---------- */
+function pool(){return Q.filter(x=>(sel.lv==='전체'||x.l===sel.lv)&&sel.topics.has(x.t))}
+function renderSetup(){
+  const lvBox=document.getElementById('lvBox');lvBox.innerHTML='';
+  [['전체','모든 단계'],['하','기본 개념'],['중','개념 응용'],['상','자료·보기']].forEach(([k,s])=>{
+    const n=Q.filter(x=>k==='전체'||x.l===k).length;
+    const b=document.createElement('button');b.className=sel.lv===k?'on':'';
+    b.innerHTML=`<b>${k}</b><small>${s} · ${n}문제</small>`;
+    b.onclick=()=>{sel.lv=k;renderSetup()};lvBox.appendChild(b);
+  });
+  const tb=document.getElementById('topicBox');tb.innerHTML='';
+  const all=document.createElement('button');all.className='chip'+(sel.topics.size===TOPICS.length?' on':'');all.textContent='전체';
+  all.onclick=()=>{sel.topics=sel.topics.size===TOPICS.length?new Set():new Set(TOPICS);renderSetup()};tb.appendChild(all);
+  TOPICS.forEach(t=>{const b=document.createElement('button');b.className='chip'+(sel.topics.has(t)?' on':'');b.textContent=t;
+    b.onclick=()=>{sel.topics.has(t)?sel.topics.delete(t):sel.topics.add(t);renderSetup()};tb.appendChild(b)});
+  const cb=document.getElementById('countBox');cb.innerHTML='';
+  const max=pool().length;
+  [10,20,30,'전부'].forEach(c=>{const b=document.createElement('button');b.className='chip'+(sel.count===c?' on':'');b.textContent=c==='전부'?`전부(${max})`:c+'문제';
+    b.onclick=()=>{sel.count=c;renderSetup()};cb.appendChild(b)});
+  const sb=document.getElementById('startBtn');sb.disabled=max===0;
+  sb.textContent=max?'풀기 시작':'단원을 하나 이상 고르세요';
+  document.getElementById('statLine').textContent=stats.solved?`지금까지 ${stats.solved}문제 풀고 ${stats.correct}문제 맞혔어요 (정답률 ${Math.round(stats.correct/stats.solved*100)}%)`:'';
+}
+document.getElementById('startBtn').onclick=()=>{
+  let list=shuffle(pool());
+  if(sel.count!=='전부')list=list.slice(0,sel.count);
+  start(list);
+};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function keepOrder(x){return /^[ㄱ-ㅎ], /.test(x.o[0])||/^ㄴ-/.test(x.o[0])||/^\(가\)/.test(x.o[0])||/^[A-D] /.test(x.o[0])||x.o[0]==='갑'}
+
+/* ---------- 풀기 ---------- */
+function start(list){
+  run={list,i:0,score:0,wrong:[]};
+  document.getElementById('setup').hidden=true;document.getElementById('result').hidden=true;document.getElementById('play').hidden=false;
+  showQ();
+}
+const circ=['①','②','③','④','⑤'];
+function showQ(){
+  const x=run.list[run.i];
+  document.getElementById('qNum').textContent=`${run.i+1} / ${run.list.length}`;
+  document.getElementById('barFill').style.width=(run.i/run.list.length*100)+'%';
+  document.getElementById('qTags').innerHTML=`<span class="tag l${x.l}">${x.l}</span><span class="tag">${x.t}</span>`;
+  document.getElementById('qText').textContent=x.text;
+  const box=document.getElementById('qBox');box.hidden=!x.box;box.textContent=x.box;
+  let order=x.o.map((_,k)=>k);if(!keepOrder(x))order=shuffle(order);
+  const ul=document.getElementById('opts');ul.innerHTML='';
+  order.forEach((k,pos)=>{const li=document.createElement('li');const b=document.createElement('button');
+    b.innerHTML=`<span class="n">${circ[pos]}</span><span></span>`;b.lastChild.textContent=x.o[k];b.dataset.k=k;
+    b.onclick=()=>answer(k);li.appendChild(b);ul.appendChild(li)});
+  const ex=document.getElementById('exp');ex.className='exp';ex.innerHTML='';
+  document.getElementById('nextBtn').className='next';
+  window.scrollTo(0,0);
+}
+function answer(k){
+  const x=run.list[run.i];const ok=k===x.a;
+  document.querySelectorAll('#opts button').forEach(b=>{b.disabled=true;const bk=+b.dataset.k;if(bk===x.a)b.classList.add('ok');else if(bk===k)b.classList.add('bad')});
+  const ex=document.getElementById('exp');ex.className='exp show '+(ok?'ok':'bad');
+  ex.innerHTML=`<b>${ok?'정답이에요':'아쉬워요. 정답: '+escapeHtml(x.o[x.a])}</b>`;ex.appendChild(document.createTextNode(x.e));
+  stats.solved++;if(ok){run.score++;stats.correct++;wrongIds=wrongIds.filter(id=>id!==x.id)}else{run.wrong.push(x);if(!wrongIds.includes(x.id))wrongIds.push(x.id)}
+  store.set('tsA_stats',stats);store.set('tsA_wrong',wrongIds);
+  const nb=document.getElementById('nextBtn');nb.className='next show';nb.textContent=run.i===run.list.length-1?'결과 보기':'다음 문제';nb.focus({preventScroll:true});
+}
+function escapeHtml(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+document.getElementById('nextBtn').onclick=()=>{run.i++;if(run.i<run.list.length)showQ();else finish()};
+document.getElementById('quitBtn').onclick=()=>{if(run.i>0||document.querySelector('#opts button:disabled')){run.list=run.list.slice(0,run.i+(document.querySelector('#opts button:disabled')?1:0));finish()}else backSetup()};
+function finish(){
+  document.getElementById('play').hidden=true;document.getElementById('result').hidden=false;
+  const n=run.list.length,s=run.score,p=n?Math.round(s/n*100):0;
+  document.getElementById('scoreBig').innerHTML=`${s}<small> / ${n}</small>`;
+  document.getElementById('scoreMsg').textContent=n?(p===100?'전부 맞혔어요! 상 단계에도 도전해 보세요.':p>=80?`정답률 ${p}%. 틀린 것만 한 번 더 보면 완벽해요.`:p>=50?`정답률 ${p}%. 개념 정리에서 빈칸을 다시 확인해 보세요.`:`정답률 ${p}%. 개념 정리를 먼저 훑고 하 단계부터 다시 풀어 보세요.`):'푼 문제가 없어요.';
+  const rw=document.getElementById('retryWrong');rw.disabled=!run.wrong.length;rw.style.opacity=run.wrong.length?1:.4;
+  rw.onclick=()=>start(shuffle(run.wrong));
+}
+function backSetup(){run=null;document.getElementById('play').hidden=true;document.getElementById('result').hidden=true;document.getElementById('setup').hidden=false;renderSetup()}
+document.getElementById('backSetup').onclick=backSetup;
+
+/* ---------- 오답 노트 ---------- */
+function renderWrong(){
+  const box=document.getElementById('wrongList');box.innerHTML='';
+  const list=wrongIds.map(id=>Q.find(x=>x.id===id)).filter(Boolean);
+  document.getElementById('wrongQuiz').style.display=list.length?'':'none';
+  document.getElementById('wrongClear').style.display=list.length?'':'none';
+  if(!list.length){box.innerHTML='<p class="empty">틀린 문제가 여기에 모여요.<br>문제를 풀다 틀리면 자동으로 저장되고, 다시 맞히면 빠져요.</p>';return}
+  list.forEach(x=>{const d=document.createElement('div');d.className='wn';
+    d.innerHTML=`<button class="del">빼기</button><span class="tag l${x.l}">${x.l}</span><span class="tag">${x.t}</span><div class="q"></div><div class="a">정답 <b></b></div><div class="e"></div>`;
+    d.querySelector('.q').textContent=x.text+(x.box?'\n'+x.box:'');d.querySelector('.a b').textContent=x.o[x.a];d.querySelector('.e').textContent=x.e;
+    d.querySelector('.del').onclick=()=>{wrongIds=wrongIds.filter(id=>id!==x.id);store.set('tsA_wrong',wrongIds);renderWrong()};
+    box.appendChild(d)});
+}
+document.getElementById('wrongQuiz').onclick=()=>{const list=wrongIds.map(id=>Q.find(x=>x.id===id)).filter(Boolean);if(!list.length)return;show('quiz');start(shuffle(list))};
+document.getElementById('wrongClear').onclick=()=>{if(confirm('오답 노트를 비울까요?')){wrongIds=[];store.set('tsA_wrong',wrongIds);renderWrong()}};
+
+renderSetup();
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+</script>
+</body>
+</html>
