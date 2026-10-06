@@ -158,6 +158,16 @@ sup{font-size:.62em;margin-left:1px}
 .wn .a b{color:var(--ok)}
 .wn .e{font-size:15px;color:var(--sub);margin-top:4px}
 .wn .del{float:right;border:0;background:none;color:var(--sub);font-size:13px;text-decoration:underline}
+.units{display:flex;gap:8px;margin:16px 0 0;overflow-x:auto;scrollbar-width:none}
+.units::-webkit-scrollbar{display:none}
+.units button{flex:none;border:1.5px solid var(--line);background:transparent;border-radius:999px;padding:7px 16px;font-size:15px;color:var(--sub)}
+.units button.on{border-color:var(--ink);background:var(--ink);color:var(--bg);font-weight:700}
+.unitc{display:none}.unitc.on{display:block}
+.tb{width:100%;border-collapse:collapse;margin:10px 0;font-size:16px}
+.tb th,.tb td{border:1px solid var(--line);padding:9px 12px;vertical-align:top;text-align:left}
+.tb th{background:var(--card);font-weight:800;text-align:center}
+.tb td:first-child,.tb td:last-child{white-space:nowrap}
+.scroll{overflow-x:auto}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -165,9 +175,14 @@ sup{font-size:.62em;margin-left:1px}
 <div class="wrap">
 <header>
   <h1>통합사회A</h1>
-  <p class="unit">Ⅳ. 세계화와 평화 1·2</p>
+  <p class="unit" id="unitLabel"></p>
   <button class="theme" id="themeBtn">테마</button>
 </header>
+<div class="units" id="unitBox">
+  <button data-u="c1">정의의 의미와 필요성</button>
+  <button data-u="c2">세계화의 다양한 양상</button>
+  <button data-u="c3">세계화의 문제점과 해결방안</button>
+</div>
 
 <div class="view on" id="concept">
   <div class="toolbar">
@@ -175,8 +190,87 @@ sup{font-size:.62em;margin-left:1px}
     <div class="legend"><span class="m">형광펜</span><span class="u">밑줄</span></div>
     <button class="pill" id="openAll" hidden>모두 보기</button>
   </div>
+  <div class="unitc" data-u="c1">
   <div class="jump">
-    <a href="#s1">세계화</a><a href="#s2">지역화</a><a href="#s3">세계 도시</a><a href="#s4">다국적 기업</a><a href="#s5">빈부 격차</a><a href="#s6">문화 획일화</a><a href="#s7">보편·특수 윤리</a>
+    <a href="#t1">정의의 의미</a><a href="#t2">플라톤</a><a href="#t3">아리스토텔레스</a><a href="#t4">정의의 필요성</a>
+  </div>
+
+  <section class="part">
+    <h2>■ 정의의 의미와 필요성</h2>
+    <p class="src">1. 정의의 의미와 필요성 · 개념완성 40-47쪽 · 교과서 40-47쪽</p>
+
+    <div class="topic" id="t1">
+      <h3 class="sub">(1) <span class="b">정의</span>의 의미</h3>
+      <p>① 개인이 지켜야 할 올바른 ( <span class="b">도리</span> )</p>
+      <p>② 사회를 구성하고 유지하는 ( <span class="b">공정한</span> ) 도리</p>
+      <p>③ 각자에게 각자의 ( <span class="b">몫</span> )을 주는 것, 마땅히 그의 몫을 받는 것</p>
+      <p>&nbsp;&nbsp;↳ 동일한 경우를 ( <span class="b">동일</span> )하게 취급하고, 다른 것은 ( <span class="b">다르게</span> ) 대우하는 것</p>
+      <p>④ 개인들 사이에서 발생하는 ( <span class="b">갈등</span> )을 <span class="b">해결</span>하는 원칙과 기준</p>
+      <p>⑤ 개인이나 사회가 추구해야 할 <span class="b">기본적이고 핵심적인 덕목</span></p>
+      <div class="box">
+        <div class="row"><div class="rk"><span class="b">공자</span></div><div class="rv">- 천하의 바른 ( <span class="b">정도</span> )(正道)를 이루는 것</div></div>
+        <div class="row"><div class="rk"><span class="b">맹자</span></div><div class="rv">- 정의를 <span class="b">의로움(義)</span>으로 표현함</div></div>
+        <div class="row"><div class="rk"><span class="b">벤담</span></div><div class="rv">- 정의는 <span class="b">최대 다수의 사람이 최대 행복</span>을 얻을 수 있게 하는 것이라고 주장함</div></div>
+      </div>
+    </div>
+
+    <div class="topic" id="t2">
+      <h4 class="tt"><span class="b">플라톤</span></h4>
+      <div class="box">
+        <p>● 정의는 각자가 자기의 성향에 가장 맞는 <span class="b">국가와 관련된 일 한 가지에 종사하며 타인에게 참견하지 않는 것</span>이다. 이렇게 해야 지혜, 용기, 절제가 국가 안에 생기고 이것들이 잘 보전될 수 있기 때문이다. 정의는 곧 <span class="b">제 것을 소유하고 제 일을 하는 것</span>이다. 만약 성향상 장인이거나 상인이 전사 계층으로 옮기려 하거나 전사들 가운데 <span class="u">어떤 사람이 자격도 없으면서 통치자 계층으로 옮기려 해서 사람들이 서로 도구나 직분을 교환하거나 한 사람이 모든 일을 동시에 하려고 한다면 국가는 파멸될 것이다.</span> -플라톤「국가」</p>
+      </div>
+      <p class="lb">① <span class="u">영혼 삼분설</span></p>
+      <div class="scroll"><table class="tb">
+        <tr><th colspan="2">인간의 영혼</th><th>해당하는 덕(탁월함)</th></tr>
+        <tr><td>( <span class="b">이성</span> )</td><td>(머리) 인간에게 있어 참으로 <span class="b">좋은 것을 배우고 헤아리는 부분</span></td><td>( <span class="b">지혜</span> )</td></tr>
+        <tr><td>( <span class="b">기개</span> )</td><td>(가슴) 나쁜 것을 볼 때 <span class="b">격정을 느끼는 부분</span></td><td>( <span class="b">용기</span> )</td></tr>
+        <tr><td>( <span class="b">욕구</span> )</td><td>(배) <span class="b">육체적 만족이나 쾌락</span>과 관련된 것을 탐하는 부분</td><td>( <span class="b">절제</span> )</td></tr>
+      </table></div>
+      <p>◦<b>영혼의 정의</b>: ( <span class="b">이성</span> )이 지혜의 덕으로써 기개와 욕구를 잘 다스려 영혼이 ( <span class="b">조화</span> )를 이루는 상태</p>
+      <p class="lb">② <span class="u">국가론</span>( <span class="b">이상국가</span> ): 정의란 국가가 지녀야 할 가장 ( <span class="b">필수적</span> )인 덕목!</p>
+      <div class="scroll"><table class="tb">
+        <tr><th colspan="2">국가의 세 계층</th><th>요구되는 덕</th></tr>
+        <tr><td>( <span class="b">통치자</span> )</td><td>국가에게 최고로 좋은 것이 무엇인지 인식하는 ( <span class="b">철학자</span> )</td><td>( <span class="b">지혜</span> ), ( <span class="b">절제</span> )</td></tr>
+        <tr><td>( <span class="b">방위자</span> ) (=보호자)</td><td>외적과 싸워 <span class="b">국민을 수호</span>하고 시민들 사이 평화와 질서를 유지</td><td>( <span class="b">용기</span> ), ( <span class="b">절제</span> )</td></tr>
+        <tr><td>( <span class="b">생산자</span> )</td><td>지도자에게 <span class="b">복종</span>하며 <span class="b">정치 생활에 참여하지 않음</span></td><td>( <span class="b">절제</span> )</td></tr>
+      </table></div>
+      <p>◦지혜의 덕을 갖춘 ( <span class="b">철학자</span> )가 통치하거나 현재의 통치자들이 ( <span class="b">철학</span> )을 해야 이상 국가 실현 가능</p>
+      <p>◦<b>국가의 정의</b>: 국가의 세 계층이 각자의 직분을 충실히 수행하고 <span class="u">서로의 일을 넘보지 않는 ( <span class="b">조화</span> )로운 상태</span></p>
+      <p>&nbsp;&nbsp;↳ <span class="u">능력과 소질에 따른 철저한 ( <span class="b">분업</span> ) 강조</span></p>
+      <p>⇒ 플라톤은 ( <span class="b">국가</span> )를 인간의 ( <span class="b">영혼</span> )이 확대된 것으로 보았으며, 국가의 정의도 영혼의 정의가 실현되는 방식과 마찬가지로 국가를 이루는 세 부분, 즉 세 계층이 조화를 이룰 때 실현</p>
+    </div>
+
+    <div class="topic" id="t3">
+      <h4 class="tt">아리스토텔레스</h4>
+      <div class="box">
+        <p>● 아리스토텔레스는 정의를 <span class="u">일반적 정의</span>와 <span class="u">특수적 정의</span>로 구분하고, 특수적 정의를 다시 <span class="u">분배적 정의</span>와 <span class="u">교정적 정의</span>, <span class="u">교환적 정의</span>로 구분하였다. 일반적 정의는 시민들이 공익을 지향하는 <span class="b">법을 따르는 것</span>을 의미한다. 특수적 정의는 각자가 받아야 할 몫을 공정하게 가지는 상태를 의미한다. <span class="b">분배적 정의</span>는 <span class="b">기하학적 비례의 동등함</span>을 추구하는 것으로 각 사람의 <span class="b">가치에 따라 분배하는 것</span>이 정의롭다는 것이다. <span class="b">교정적 정의</span>는 <span class="b">산술적 비례의 동등함</span>을 추구하는 것으로 다른 사람에게 해를 끼친 경우, <span class="b">그만큼 보상</span>해주고, 이익을 준 경우, <span class="b">그만큼 받아야 정의</span>롭다는 것이다. <span class="b">교환적 정의</span>는 <span class="b">비례에 따른 호혜</span>(양쪽의 기술과 그들의 생산물의 가치를 비교하여 고려한 주고받음)를 의미한다.</p>
+      </div>
+      <div class="box">
+        <div class="row"><div class="rk">일반적<br>(보편적) 정의</div><div class="rv">= 보편적 정의: 공익 실현을 위한 ( <span class="b">법</span> )을 준수하는 것 (= 준법)</div></div>
+        <div class="row"><div class="rk">부분적<br>(특수적) 정의</div><div class="rv">
+          <p>① ( <span class="b">분배</span> )적 정의( <span class="u">기하학</span>적 비례 → 비율 ⊜ ): 각자의 <span class="u">가치</span>에 따라 몫을 분배하는 것 ⇒ 일한 만큼 분배받기!</p>
+          <p>② ( <span class="b">시정(교정)</span> )적 정의( <span class="u">산술</span>적 비례 → 차이 ⊜ ): 손해, 이익에서 동등하지 않은 것을 바로잡는 것 ⇒ 눈에는 눈, 이에는 이!</p>
+          <p>③ ( <span class="b">교환</span> )적 정의 → 호혜 (양측 ☺): <span class="u">교환의 결과를 공정</span>하게 하는 것 ⇒ 노동과 재화의 교환을 공정하게!</p>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="topic" id="t4">
+      <h3 class="sub">(2) 정의의 필요성</h3>
+      <p>① 개인의 권리와 의무를 보장함: ( <span class="b">기본권</span> ) 보장</p>
+      <p>② 공동체가 이룩한 성과와 공동체가 져야 할 부담을 <span class="b">공정하게</span> ( <span class="b">분배</span> )하는 기준이 됨</p>
+      <p>③ <span class="b">개인선과 공동선의 조화</span> 및 실현 ⇒ 사회적 ( <span class="b">갈등</span> )을 최소화, 사회통합 실현에 기여</p>
+      <p>&nbsp;&nbsp;- ( <span class="b">개인선</span> ): 존엄한 존재인 인간의 가치 및 <span class="b">개인의 행복 추구</span>와 ( <span class="b">자아실현</span> )을 중시하는 것</p>
+      <p>&nbsp;&nbsp;- ( <span class="b">공동선</span> ): 공동체의 가치와 전통에 따라 <span class="b">공동체 구성원의 자아실현과 인격 완성</span>을 추구하고, 개인의 이익보다는 <span class="b">공동의 이익</span>을 중시하는 것</p>
+      <p>④ 개인 및 집단 간의 <span class="b">갈등과 분쟁을 조정</span>하여 사회 문제 해결</p>
+      <p>⑤ 옳고 그름에 대한 판단 기준 제공: 사회 구성원들이 추구해야 할 <span class="b">올바르고 공정한 가치</span>로 작용</p>
+    </div>
+  </section>
+</div>
+
+<div class="unitc" data-u="c2">
+<div class="jump">
+    <a href="#s1">세계화</a><a href="#s2">지역화</a><a href="#s3">세계 도시</a><a href="#s4">다국적 기업</a>
   </div>
 
   <section class="part">
@@ -279,6 +373,13 @@ sup{font-size:.62em;margin-left:1px}
     </div>
   </section>
 
+</div>
+
+<div class="unitc" data-u="c3">
+<div class="jump">
+    <a href="#s5">빈부 격차</a><a href="#s6">문화 획일화</a><a href="#s7">보편·특수 윤리</a>
+  </div>
+
   <section class="part">
     <h2>■ <span class="b">세계화</span>의 문제점과 해결방안</h2>
     <p class="src">2. 세계화의 문제점과 해결방안</p>
@@ -340,6 +441,7 @@ sup{font-size:.62em;margin-left:1px}
     </div>
   </section>
 </div>
+</div>
 
 <div class="view" id="quiz">
   <div id="setup" class="setup">
@@ -384,8 +486,8 @@ sup{font-size:.62em;margin-left:1px}
 </div></nav>
 <script>
 /* ---------- 문제 데이터 ---------- */
-const Q=[];let _id=0;
-function q(l,t,text,o,a,e,box){Q.push({id:++_id,l,t,text,o,a,e,box:box||''});}
+const Q=[];let _id=0;let CUR='4';
+function q(l,t,text,o,a,e,box){Q.push({id:++_id,u:CUR,l,t,text,o,a,e,box:box||''});}
 
 /* ===== 하 ===== */
 q('하','세계화','지역 또는 국가 간 상호 의존성이 높아지면서 세계가 하나의 생활공간이 되어 가는 현상은?',['지역화','세계화','도시화','산업화','정보화'],1,'세계화의 의미 그대로예요. 지역화는 지역의 생활양식이 세계적 가치를 지니게 되는 현상이에요.');
@@ -487,12 +589,69 @@ q('상','세계 도시','세계 도시와 다국적 기업의 관계에 대한 �
 q('상','세계화','<보기>에서 옳은 것만 고른 것은?',['ㄱ, ㄷ','ㄴ, ㄷ','ㄱ, ㄴ, ㄹ','ㄱ, ㄷ, ㄹ','ㄴ, ㄷ, ㄹ'],2,'세계화로 지역 간 경쟁은 심화돼요.','ㄱ. WTO는 1995년에 출범하였다.\nㄴ. WTO는 지식 재산권 분야의 교역도 다룬다.\nㄷ. 세계화로 지역 간 경쟁이 약화되었다.\nㄹ. 교통·통신의 발달은 세계화의 배경이다.');
 q('상','세계 도시','세계 도시 체계 지도를 분석한 것으로 옳은 것은?',['최상위 세계 도시는 뉴욕, 런던, 도쿄이다','세계 도시는 모두 북반구에만 있다','세계 도시끼리는 서로 연결되어 있지 않다','도쿄는 하위 세계 도시이다','요하네스버그는 최상위 세계 도시이다'],0,'시드니·상파울루·요하네스버그처럼 남반구에도 세계 도시가 있어요. 도시들은 선으로 연결되어 있어요.');
 
+
+/* ===== Ⅱ. 사회 정의와 불평등 (1~2쪽) ===== */
+CUR='2';
+q('하','정의의 의미','빈칸에 알맞은 말은?',['권리','몫','의무','이익','행복'],1,'정의는 각자에게 각자의 몫을 주는 것, 마땅히 그의 몫을 받는 것이에요.','각자에게 각자의 (   )을 주는 것, 마땅히 그의 몫을 받는 것');
+q('하','정의의 의미','정의의 의미로 옳지 않은 것은?',['개인이 지켜야 할 올바른 도리','사회를 구성하고 유지하는 공정한 도리','개인들 사이에서 발생하는 갈등을 해결하는 원칙과 기준','개인이나 사회가 추구해야 할 기본적이고 핵심적인 덕목','모든 사람을 어떤 경우에도 똑같이 대우하는 것'],4,'정의는 동일한 경우는 동일하게, 다른 것은 다르게 대우하는 거예요. 무조건 똑같이 대우하는 게 아니에요.');
+q('하','정의의 의미','빈칸에 들어갈 말을 순서대로 고른 것은?',['동일 – 동일하게','다르게 – 동일하게','동일 – 다르게','공정 – 차별','같게 – 무시'],2,'동일한 경우를 동일하게 취급하고, 다른 것은 다르게 대우하는 것이에요.','동일한 경우를 (   )하게 취급하고, 다른 것은 (   ) 대우하는 것');
+q('하','정의의 의미','정의를 "천하의 바른 정도(正道)를 이루는 것"이라고 본 사상가는?',['공자','맹자','벤담','플라톤','아리스토텔레스'],0,'공자: 천하의 바른 정도(正道)를 이루는 것.');
+q('하','정의의 의미','정의를 의로움(義)으로 표현한 사상가는?',['공자','맹자','벤담','플라톤','롤스'],1,'맹자는 정의를 의로움(義)으로 표현했어요.');
+q('하','정의의 의미','정의를 "최대 다수의 사람이 최대 행복을 얻을 수 있게 하는 것"이라고 주장한 사상가는?',['공자','맹자','벤담','플라톤','아리스토텔레스'],2,'벤담: 최대 다수의 최대 행복.');
+q('하','플라톤','플라톤의 영혼 삼분설에서 머리에 해당하며, 참으로 좋은 것을 배우고 헤아리는 부분은?',['이성','기개','욕구','절제','용기'],0,'이성(머리) – 지혜, 기개(가슴) – 용기, 욕구(배) – 절제.');
+q('하','플라톤','플라톤의 영혼 삼분설에서 기개에 해당하는 덕은?',['지혜','용기','절제','정의','신앙'],1,'기개(가슴)는 나쁜 것을 볼 때 격정을 느끼는 부분이고, 덕은 용기예요.');
+q('하','플라톤','플라톤의 영혼 삼분설에서 육체적 만족이나 쾌락과 관련된 것을 탐하는 부분과 그 덕은?',['이성 – 지혜','기개 – 용기','욕구 – 절제','이성 – 절제','욕구 – 용기'],2,'욕구(배) – 절제.');
+q('하','플라톤','플라톤이 말한 국가의 세 계층 중 외적과 싸워 국민을 수호하는 계층은?',['통치자','방위자(보호자)','생산자','철학자','상인'],1,'방위자(=보호자)는 외적과 싸워 국민을 수호하고 평화와 질서를 유지해요.');
+q('하','플라톤','플라톤의 이상 국가에서 생산자에게 요구되는 덕은?',['지혜','용기','절제','지혜와 용기','용기와 절제'],2,'생산자는 절제. 지도자에게 복종하며 정치 생활에 참여하지 않아요.');
+q('하','플라톤','플라톤이 이상 국가를 이끌어야 한다고 본 사람은?',['상인','장인','방위자','지혜의 덕을 갖춘 철학자','다수의 시민'],3,'지혜의 덕을 갖춘 철학자가 통치하거나, 현재 통치자들이 철학을 해야 이상 국가가 실현돼요.');
+q('하','아리스토텔레스','아리스토텔레스가 말한 일반적(보편적) 정의는?',['공익 실현을 위한 법을 준수하는 것','각자의 가치에 따라 분배하는 것','손해를 바로잡는 것','교환의 결과를 공정하게 하는 것','최대 다수의 최대 행복'],0,'일반적 정의 = 보편적 정의 = 법 준수(준법).');
+q('하','아리스토텔레스','"눈에는 눈, 이에는 이"와 가장 관련 깊은 정의는?',['일반적 정의','분배적 정의','교정적 정의','교환적 정의','보편적 정의'],2,'교정적(시정적) 정의는 손해·이익에서 동등하지 않은 것을 바로잡는 거예요.');
+q('하','아리스토텔레스','각자의 가치에 따라 몫을 분배하는 것으로, "일한 만큼 분배받기"에 해당하는 정의는?',['일반적 정의','분배적 정의','교정적 정의','교환적 정의','시정적 정의'],1,'분배적 정의 = 기하학적 비례 = 가치에 따른 분배.');
+q('하','아리스토텔레스','노동과 재화의 교환을 공정하게 하는 정의는?',['분배적 정의','교정적 정의','교환적 정의','일반적 정의','절차적 정의'],2,'교환적 정의 = 교환의 결과를 공정하게, 비례에 따른 호혜.');
+q('하','정의의 필요성','정의가 필요한 이유 중, 개인의 권리와 의무를 보장한다는 것은 무엇을 보장하는 것인가?',['기본권','특권','재산권만','정치권력','공동선'],0,'정의는 개인의 권리와 의무를 보장해요 → 기본권 보장.');
+q('하','정의의 필요성','존엄한 존재인 인간의 가치 및 개인의 행복 추구와 자아실현을 중시하는 것은?',['공동선','개인선','공익','준법','분업'],1,'개인선의 의미예요.');
+q('하','정의의 필요성','공동체의 가치와 전통에 따라 구성원의 자아실현과 인격 완성을 추구하고, 개인의 이익보다 공동의 이익을 중시하는 것은?',['개인선','공동선','이기심','분배','기본권'],1,'공동선의 의미예요.');
+
+q('중','정의의 의미','사상가와 정의에 대한 입장을 바르게 연결한 것은?',['공자 – 의로움(義)','맹자 – 천하의 바른 정도(正道)','벤담 – 최대 다수의 최대 행복','플라톤 – 일반적 정의와 특수적 정의 구분','아리스토텔레스 – 영혼 삼분설'],2,'공자는 정도, 맹자는 의로움, 영혼 삼분설은 플라톤, 일반적·특수적 정의 구분은 아리스토텔레스예요.');
+q('중','정의의 의미','정의의 의미에 대한 설명으로 옳은 것은?',['개인에게만 해당되고 사회와는 관계없다','갈등을 해결하는 원칙과 기준이 된다','다른 경우에도 반드시 같게 대우해야 한다','사회가 추구할 덕목이 아니다','사회를 유지하는 도리와 무관하다'],1,'④ 개인들 사이에서 발생하는 갈등을 해결하는 원칙과 기준.');
+q('중','플라톤','플라톤의 영혼의 정의를 바르게 설명한 것은?',['욕구가 이성과 기개를 다스리는 상태','기개가 용기로 욕구를 억누르는 상태','이성이 지혜의 덕으로 기개와 욕구를 잘 다스려 영혼이 조화를 이루는 상태','세 부분이 서로 경쟁하는 상태','이성을 버리고 감정을 따르는 상태'],2,'영혼의 정의: 이성이 기개와 욕구를 다스려 조화를 이루는 상태.');
+q('중','플라톤','플라톤의 국가 세 계층과 요구되는 덕을 바르게 연결한 것은?',['통치자 – 용기, 절제','방위자 – 지혜, 절제','생산자 – 지혜','통치자 – 지혜, 절제','방위자 – 절제만'],3,'통치자: 지혜·절제 / 방위자: 용기·절제 / 생산자: 절제.');
+q('중','플라톤','플라톤의 국가 세 계층 모두에게 공통으로 요구되는 덕은?',['지혜','용기','절제','정의','신앙'],2,'통치자·방위자·생산자 모두에게 절제가 들어가 있어요.');
+q('중','플라톤','플라톤이 말한 국가의 정의로 옳은 것은?',['한 사람이 모든 일을 동시에 하는 상태','세 계층이 각자의 직분을 충실히 수행하고 서로의 일을 넘보지 않는 조화로운 상태','생산자가 통치에 참여하는 상태','모든 계층이 같은 일을 하는 상태','최대 다수의 최대 행복을 이루는 상태'],1,'국가의 정의는 조화로운 상태이고, 능력과 소질에 따른 철저한 분업을 강조해요.');
+q('중','플라톤','플라톤의 국가 정의에서 강조하는 것은?',['능력과 소질에 따른 철저한 분업','직분의 자유로운 교환','계층 간 이동','생산자의 정치 참여','모든 일을 혼자 하는 능력'],0,'능력과 소질에 따른 철저한 분업.');
+q('중','플라톤','다음 글에서 플라톤이 국가가 파멸된다고 본 경우는?',['각자가 자기 성향에 맞는 일을 할 때','자격 없는 사람이 통치자 계층으로 옮기고 서로 직분을 교환할 때','지혜·용기·절제가 국가 안에 보전될 때','제 것을 소유하고 제 일을 할 때','타인에게 참견하지 않을 때'],1,'직분을 교환하거나 한 사람이 모든 일을 하려 하면 국가는 파멸돼요.','정의는 곧 제 것을 소유하고 제 일을 하는 것이다. 만약 … 어떤 사람이 자격도 없으면서 통치자 계층으로 옮기려 해서 사람들이 서로 도구나 직분을 교환하거나 한 사람이 모든 일을 동시에 하려고 한다면 국가는 파멸될 것이다.');
+q('중','플라톤','플라톤의 사상에 대한 설명으로 옳지 않은 것은?',['국가를 인간의 영혼이 확대된 것으로 보았다','국가론은 이상국가를 다룬다','정의는 국가가 지녀야 할 가장 필수적인 덕목이다','생산자는 정치 생활에 적극 참여해야 한다','철학자가 통치해야 이상 국가가 실현된다'],3,'생산자는 지도자에게 복종하며 정치 생활에 참여하지 않아요.');
+q('중','아리스토텔레스','아리스토텔레스의 정의 분류를 바르게 나타낸 것은?',['일반적 정의 → 분배적·교정적·교환적 정의','특수적 정의 → 분배적·교정적·교환적 정의','분배적 정의 → 일반적·특수적 정의','교정적 정의 → 일반적·교환적 정의','교환적 정의 → 분배적·특수적 정의'],1,'정의를 일반적·특수적으로 나누고, 특수적 정의를 다시 분배적·교정적·교환적 정의로 나눴어요.');
+q('중','아리스토텔레스','기하학적 비례의 동등함을 추구하는 정의와 산술적 비례의 동등함을 추구하는 정의를 순서대로 고른 것은?',['교정적 – 분배적','분배적 – 교정적','교환적 – 분배적','일반적 – 특수적','분배적 – 교환적'],1,'기하학적 비례(비율 ⊜) = 분배적, 산술적 비례(차이 ⊜) = 교정적.');
+q('중','아리스토텔레스','다음 사례와 관련된 아리스토텔레스의 정의는?',['일반적 정의','분배적 정의','교정적 정의','교환적 정의','보편적 정의'],2,'손해를 끼친 만큼 보상하는 것은 교정적 정의예요.','갑은 실수로 을의 휴대폰을 떨어뜨려 망가뜨렸고, 수리비 전액을 을에게 물어 주었다.');
+q('중','아리스토텔레스','다음 사례와 관련된 아리스토텔레스의 정의는?',['일반적 정의','분배적 정의','교정적 정의','교환적 정의','시정적 정의'],1,'기여(가치)에 비례해 몫을 나누는 것은 분배적 정의예요.','모둠 과제에서 기여한 정도에 따라 상금을 나누어 가졌다.');
+q('중','아리스토텔레스','교환적 정의에 대한 설명으로 옳은 것은?',['법을 준수하는 것이다','손해를 처벌로 바로잡는 것이다','양쪽의 기술과 생산물의 가치를 비교해 고려한 주고받음, 즉 비례에 따른 호혜이다','각자의 가치에 따라 분배하는 것이다','최대 다수의 최대 행복을 추구하는 것이다'],2,'교환적 정의 = 비례에 따른 호혜(양측 ☺).');
+q('중','정의의 필요성','정의의 필요성으로 옳지 않은 것은?',['개인의 기본권을 보장한다','공동체의 성과와 부담을 공정하게 분배하는 기준이 된다','개인선과 공동선의 조화로 사회적 갈등을 최소화한다','개인 및 집단 간 갈등과 분쟁을 조정한다','옳고 그름의 판단 기준을 없애 준다'],4,'정의는 옳고 그름에 대한 판단 기준을 제공해요.');
+q('중','정의의 필요성','개인선과 공동선의 조화가 사회에 주는 영향으로 가장 알맞은 것은?',['사회적 갈등이 커진다','사회적 갈등을 최소화하고 사회 통합 실현에 기여한다','개인의 자아실현이 불가능해진다','공동의 이익이 사라진다','기본권이 제한된다'],1,'③ 개인선과 공동선의 조화 및 실현 ⇒ 사회적 갈등 최소화, 사회통합.');
+q('중','정의의 필요성','개인선과 공동선을 바르게 설명한 것은?',['개인선은 공동의 이익을 우선한다','공동선은 개인의 행복 추구만 중시한다','개인선은 개인의 행복 추구와 자아실현을, 공동선은 공동의 이익을 중시한다','둘은 절대 조화될 수 없다','공동선은 공동체의 전통과 무관하다'],2,'개인선: 행복 추구·자아실현 / 공동선: 구성원의 자아실현과 인격 완성, 공동의 이익.');
+
+q('상','정의의 의미','갑~병의 주장을 한 사상가를 바르게 연결한 것은?',['갑 공자 / 을 맹자 / 병 벤담','갑 맹자 / 을 공자 / 병 벤담','갑 벤담 / 을 맹자 / 병 공자','갑 공자 / 을 벤담 / 병 맹자','갑 맹자 / 을 벤담 / 병 공자'],0,'정도(正道) = 공자, 의로움(義) = 맹자, 최대 다수의 최대 행복 = 벤담.','갑: 정의란 천하의 바른 정도(正道)를 이루는 것이다.\n을: 정의는 의로움(義)이다.\n병: 정의는 최대 다수의 사람이 최대 행복을 얻게 하는 것이다.');
+q('상','플라톤','<보기>에서 플라톤의 입장으로 옳은 것만 고른 것은?',['ㄱ, ㄴ','ㄱ, ㄹ','ㄴ, ㄷ','ㄴ, ㄹ','ㄷ, ㄹ'],1,'ㄴ 방위자는 용기와 절제, ㄷ 생산자는 정치에 참여하지 않아요.','ㄱ. 통치자에게는 지혜와 절제가 요구된다.\nㄴ. 방위자에게는 용기만 요구된다.\nㄷ. 생산자도 정치 생활에 적극 참여해야 한다.\nㄹ. 국가의 정의는 세 계층이 조화를 이룰 때 실현된다.');
+q('상','플라톤','플라톤의 영혼과 국가 계층의 대응 관계로 옳은 것은?',['이성 – 생산자, 기개 – 통치자, 욕구 – 방위자','이성 – 통치자, 기개 – 방위자, 욕구 – 생산자','이성 – 방위자, 기개 – 생산자, 욕구 – 통치자','이성 – 통치자, 기개 – 생산자, 욕구 – 방위자','이성 – 생산자, 기개 – 방위자, 욕구 – 통치자'],1,'덕을 기준으로 맞추면 돼요. 지혜(이성·통치자), 용기(기개·방위자), 절제(욕구·생산자). 국가는 영혼이 확대된 것.');
+q('상','플라톤','다음 사례를 플라톤의 입장에서 평가한 것으로 가장 알맞은 것은?',['자유로운 직업 선택이므로 정의롭다','능력과 소질에 따른 분업이 무너져 국가의 조화가 깨지므로 정의롭지 않다','최대 다수의 행복을 늘리므로 정의롭다','교정적 정의에 어긋나므로 처벌해야 한다','교환적 정의가 실현된 사례다'],1,'자격 없이 통치자 계층으로 옮기려는 것은 서로의 일을 넘보는 것이라 국가가 파멸된다고 봐요.','성향상 장인인 A가 자격이 없음에도 통치자가 되겠다며 통치 업무와 장인 일을 동시에 하려 한다.');
+q('상','아리스토텔레스','다음 (가)~(다)에 해당하는 정의를 바르게 연결한 것은?',['(가) 분배적 (나) 교정적 (다) 교환적','(가) 교정적 (나) 분배적 (다) 교환적','(가) 교환적 (나) 교정적 (다) 분배적','(가) 분배적 (나) 교환적 (다) 교정적','(가) 일반적 (나) 교정적 (다) 교환적'],0,'공헌도에 따른 성과급 = 분배적, 손해 배상 = 교정적, 공정한 거래 = 교환적.','(가) 회사가 공헌도에 비례해 성과급을 지급했다.\n(나) 남의 물건을 망가뜨린 사람이 그만큼 배상했다.\n(다) 농부와 목수가 서로의 생산물 가치를 따져 공정하게 맞바꾸었다.');
+q('상','아리스토텔레스','다음 상황에서 분배적 정의와 교정적 정의에 따른 판단을 바르게 짝지은 것은?',['을 8만 원 / 정 10만 원 배상','을 16만 원 / 정 5만 원 배상','을 8만 원 / 정 20만 원 배상','을 4만 원 / 정 10만 원 배상','을 16만 원 / 정 10만 원 배상'],0,'분배적(기하학적 비례, 비율 ⊜): 일한 시간이 절반이면 몫도 절반 → 8만 원. 교정적(산술적 비례, 차이 ⊜): 끼친 손해만큼 → 10만 원.','· 갑은 8시간, 을은 4시간 일했다. 갑이 16만 원을 받았다면 을이 받을 몫은?\n· 정은 병에게 10만 원의 손해를 입혔다. 정이 병에게 배상할 금액은?');
+q('상','아리스토텔레스','<보기>에서 아리스토텔레스의 정의관에 대한 설명으로 옳은 것만 고른 것은?',['ㄱ, ㄴ','ㄱ, ㄷ','ㄴ, ㄹ','ㄱ, ㄷ, ㄹ','ㄴ, ㄷ, ㄹ'],3,'ㄴ: 기하학적 비례는 분배적 정의예요. 교정적 정의는 산술적 비례.','ㄱ. 일반적 정의는 공익을 지향하는 법을 따르는 것이다.\nㄴ. 교정적 정의는 기하학적 비례의 동등함을 추구한다.\nㄷ. 분배적 정의는 각 사람의 가치에 따라 분배하는 것이다.\nㄹ. 교환적 정의는 비례에 따른 호혜를 의미한다.');
+q('상','아리스토텔레스','갑, 을의 주장으로 볼 때 옳은 설명은?',['갑은 교정적 정의, 을은 분배적 정의를 주장한다','갑은 분배적 정의, 을은 교정적 정의를 주장한다','갑과 을 모두 일반적 정의를 주장한다','갑은 교환적 정의, 을은 일반적 정의를 주장한다','갑과 을 모두 플라톤의 입장이다'],1,'갑: 가치에 따른 분배(분배적) / 을: 차이를 같게 바로잡음(교정적).','갑: 공동체에 더 많이 기여한 사람이 더 많은 몫을 받아야 한다.\n을: 누군가 손해를 입었다면, 이득을 본 쪽에서 그 차이만큼 돌려주어 바로잡아야 한다.');
+q('상','정의의 필요성','<보기>에서 정의가 필요한 이유로 옳은 것만 고른 것은?',['ㄱ, ㄴ','ㄷ, ㄹ','ㄱ, ㄴ, ㄷ','ㄱ, ㄴ, ㄹ','ㄴ, ㄷ, ㄹ'],3,'정의는 개인선과 공동선을 조화시켜 갈등을 줄여요. 개인선을 희생시키는 게 아니에요.','ㄱ. 개인의 기본권을 보장한다.\nㄴ. 공동체의 성과와 부담을 공정하게 분배하는 기준이 된다.\nㄷ. 공동선을 위해 개인선을 항상 희생시키도록 한다.\nㄹ. 옳고 그름에 대한 판단 기준을 제공한다.');
+q('상','정의의 필요성','(가), (나)에 해당하는 개념을 바르게 짝지은 것은?',['(가) 공동선 (나) 개인선','(가) 개인선 (나) 공동선','(가) 기본권 (나) 공익','(가) 공익 (나) 기본권','(가) 개인선 (나) 기본권'],1,'행복 추구·자아실현 = 개인선, 공동의 이익 = 공동선. 둘의 조화가 사회 통합에 기여해요.','(가) 존엄한 존재인 인간의 가치와 개인의 행복 추구, 자아실현을 중시하는 것\n(나) 공동체의 가치와 전통에 따라 구성원의 인격 완성을 추구하고 공동의 이익을 중시하는 것');
+q('상','정의의 의미','"동일한 경우는 동일하게, 다른 것은 다르게 대우한다"는 정의의 의미에 맞는 사례는?',['같은 시험 점수를 받은 두 학생에게 다른 등급을 준다','몸이 불편한 학생에게도 일반 학생과 무조건 같은 체육 기준을 적용한다','같은 일을 같은 시간 한 두 사람에게 같은 임금을, 더 많이 일한 사람에게 더 많은 임금을 준다','친한 친구에게만 더 많은 몫을 준다','모든 경우에 결과를 똑같이 나눈다'],2,'같은 경우는 같게, 다른 경우는 다르게 대우한 사례예요.');
+
 /* ---------- 상태 ---------- */
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let wrongIds=store.get('tsA_wrong',[]);
 let stats=store.get('tsA_stats',{solved:0,correct:0});
-const TOPICS=['세계화','지역화','세계 도시','다국적 기업','빈부 격차','문화 획일화','보편·특수 윤리'];
-let sel={lv:'전체',topics:new Set(TOPICS),count:20};
+const TOPICS_BY={'c1':['정의의 의미','플라톤','아리스토텔레스','정의의 필요성'],'c2':['세계화','지역화','세계 도시','다국적 기업'],'c3':['빈부 격차','문화 획일화','보편·특수 윤리']};
+const UNIT_NAME={'c1':'Ⅱ. 사회 정의와 불평등 — 1. 정의의 의미와 필요성','c2':'Ⅳ. 세계화와 평화 — 1. 세계화의 다양한 양상','c3':'Ⅳ. 세계화와 평화 — 2. 세계화의 문제점과 해결방안'};
+const chOf=x=>/문제점과 해결 방안/.test(x.text)?'c3':Object.keys(TOPICS_BY).find(k=>TOPICS_BY[k].includes(x.t));
+let unit=store.get('tsA_unit','c1');unit={'2':'c1','4':'c2'}[unit]||unit;if(!TOPICS_BY[unit])unit='c1';
+const T=()=>TOPICS_BY[unit];
+let sel={lv:'전체',topics:new Set(T()),count:20};
 let run=null;
 
 /* ---------- 탭 ---------- */
@@ -530,19 +689,19 @@ themeBtn.onclick=()=>{const dark=theme?theme==='dark':matchMedia('(prefers-color
 applyTheme();
 
 /* ---------- 문제 설정 ---------- */
-function pool(){return Q.filter(x=>(sel.lv==='전체'||x.l===sel.lv)&&sel.topics.has(x.t))}
+function pool(){return Q.filter(x=>chOf(x)===unit&&(sel.lv==='전체'||x.l===sel.lv)&&(sel.topics.has(x.t)||(!T().includes(x.t)&&sel.topics.size===T().length)))}
 function renderSetup(){
   const lvBox=document.getElementById('lvBox');lvBox.innerHTML='';
   [['전체','모든 단계'],['하','기본 개념'],['중','개념 응용'],['상','자료·보기']].forEach(([k,s])=>{
-    const n=Q.filter(x=>k==='전체'||x.l===k).length;
+    const n=Q.filter(x=>chOf(x)===unit&&(k==='전체'||x.l===k)).length;
     const b=document.createElement('button');b.className=sel.lv===k?'on':'';
     b.innerHTML=`<b>${k}</b><small>${s} · ${n}문제</small>`;
     b.onclick=()=>{sel.lv=k;renderSetup()};lvBox.appendChild(b);
   });
   const tb=document.getElementById('topicBox');tb.innerHTML='';
-  const all=document.createElement('button');all.className='chip'+(sel.topics.size===TOPICS.length?' on':'');all.textContent='전체';
-  all.onclick=()=>{sel.topics=sel.topics.size===TOPICS.length?new Set():new Set(TOPICS);renderSetup()};tb.appendChild(all);
-  TOPICS.forEach(t=>{const b=document.createElement('button');b.className='chip'+(sel.topics.has(t)?' on':'');b.textContent=t;
+  const all=document.createElement('button');all.className='chip'+(sel.topics.size===T().length?' on':'');all.textContent='전체';
+  all.onclick=()=>{sel.topics=sel.topics.size===T().length?new Set():new Set(T());renderSetup()};tb.appendChild(all);
+  T().forEach(t=>{const b=document.createElement('button');b.className='chip'+(sel.topics.has(t)?' on':'');b.textContent=t;
     b.onclick=()=>{sel.topics.has(t)?sel.topics.delete(t):sel.topics.add(t);renderSetup()};tb.appendChild(b)});
   const cb=document.getElementById('countBox');cb.innerHTML='';
   const max=pool().length;
@@ -614,7 +773,7 @@ function renderWrong(){
   document.getElementById('wrongClear').style.display=list.length?'':'none';
   if(!list.length){box.innerHTML='<p class="empty">틀린 문제가 여기에 모여요.<br>문제를 풀다 틀리면 자동으로 저장되고, 다시 맞히면 빠져요.</p>';return}
   list.forEach(x=>{const d=document.createElement('div');d.className='wn';
-    d.innerHTML=`<button class="del">빼기</button><span class="tag l${x.l}">${x.l}</span><span class="tag">${x.t}</span><div class="q"></div><div class="a">정답 <b></b></div><div class="e"></div>`;
+    d.innerHTML=`<button class="del">빼기</button><span class="tag l${x.l}">${x.l}</span><span class="tag">${x.u==='2'?'Ⅱ':'Ⅳ'} ${x.t}</span><div class="q"></div><div class="a">정답 <b></b></div><div class="e"></div>`;
     d.querySelector('.q').textContent=x.text+(x.box?'\n'+x.box:'');d.querySelector('.a b').textContent=x.o[x.a];d.querySelector('.e').textContent=x.e;
     d.querySelector('.del').onclick=()=>{wrongIds=wrongIds.filter(id=>id!==x.id);store.set('tsA_wrong',wrongIds);renderWrong()};
     box.appendChild(d)});
@@ -622,7 +781,16 @@ function renderWrong(){
 document.getElementById('wrongQuiz').onclick=()=>{const list=wrongIds.map(id=>Q.find(x=>x.id===id)).filter(Boolean);if(!list.length)return;show('quiz');start(shuffle(list))};
 document.getElementById('wrongClear').onclick=()=>{if(confirm('오답 노트를 비울까요?')){wrongIds=[];store.set('tsA_wrong',wrongIds);renderWrong()}};
 
-renderSetup();
+function setUnit(u){
+  unit=u;store.set('tsA_unit',u);
+  document.querySelectorAll('#unitBox button').forEach(b=>b.classList.toggle('on',b.dataset.u===u));
+  document.querySelectorAll('.unitc').forEach(c=>c.classList.toggle('on',c.dataset.u===u));
+  document.getElementById('unitLabel').textContent=UNIT_NAME[u];
+  sel.topics=new Set(T());
+  if(!run)renderSetup();
+}
+document.querySelectorAll('#unitBox button').forEach(b=>b.onclick=()=>{if(run&&!document.getElementById('play').hidden&&!confirm('푸는 중인 문제를 그만두고 단원을 바꿀까요?'))return;if(run)backSetup();setUnit(b.dataset.u)});
+setUnit(unit);
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 </script>
 </body>
