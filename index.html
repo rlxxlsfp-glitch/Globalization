@@ -173,6 +173,32 @@ sup{font-size:.62em;margin-left:1px}
 .tb th{background:var(--card);font-weight:800;text-align:center}
 .tb td:first-child,.tb td:last-child{white-space:nowrap}
 .scroll{overflow-x:auto}
+.fig{margin:0 0 16px;text-align:center;color:var(--ink)}
+.fsvg{width:100%;max-width:420px;height:auto;overflow:visible}
+.fsvg .fl{fill:var(--card);stroke:var(--ink);stroke-width:1.5}
+.fsvg .op{fill-opacity:.55}
+.fsvg .hl{fill:var(--mk)}
+.fsvg .ln{stroke:currentColor;stroke-width:1.6;fill:none}
+.fsvg .dash{stroke-dasharray:5 4}
+.fsvg text{fill:currentColor;font-family:inherit;text-anchor:middle}
+.fsvg text[text-anchor=start]{text-anchor:start}
+.fsvg text[text-anchor=end]{text-anchor:end}
+.fsvg .tb{font-size:17px;font-weight:800}
+.fsvg .tm{font-size:16px;font-weight:800}
+.fsvg .ts{font-size:12px;font-weight:700}
+.fsvg .hl+text,.fsvg rect.hl+text,.fsvg circle.hl+text{fill:var(--mkink)}
+.fsvg .tx{font-size:11px;fill:var(--sub)}
+.fsvg .b1{fill:var(--ink)}
+.fsvg .b2{fill:var(--mk);stroke:var(--ink);stroke-width:1}
+.fcap{font-size:13px;color:var(--sub);margin:4px 0 0}
+.mx{border-collapse:collapse;margin:0 auto;font-size:14px;min-width:280px}
+.mx th,.mx td{border:1px solid var(--line);padding:8px 10px;text-align:center}
+.mx th{background:var(--card);font-weight:700}
+.mx td{font-weight:800;font-size:16px}
+.mx.dt td{font-weight:400;font-size:15px}
+.mx .rq{max-width:120px;font-size:13px}
+.qbox .bl{white-space:pre-wrap}
+.qbox .scroll{margin:6px 0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -586,6 +612,7 @@ sup{font-size:.62em;margin-left:1px}
     <div class="bar"><div id="barFill"></div></div>
     <div id="qTags"></div>
     <div class="qtext" id="qText"></div>
+    <div class="fig" id="qFig" hidden></div>
     <div class="qbox" id="qBox" hidden></div>
     <ul class="opts" id="opts"></ul>
     <div class="exp" id="exp"></div>
@@ -1068,6 +1095,50 @@ q('상','보편·특수 윤리','(가)의 갑, 을이 서로에게 제기할 수
 q('상','빈부 격차','빈부 격차의 해결 방안으로 옳은 것만을 <보기>에서 있는 대로 고른 것은?',['ㄱ','ㄴ','ㄷ','ㄱ, ㄴ','ㄱ, ㄴ, ㄷ'],3,'ㄷ: 문화 다양성 선언은 문화 획일화 해결 방안이에요.','ㄱ. 개발도상국의 자립을 위한 공적 개발 원조와 기술 이전\nㄴ. 공정 무역, 공정 여행 등 윤리적 소비 확대\nㄷ. 유네스코 문화 다양성 선언과 같은 국제적 협력');
 q('상','문화 획일화','문화 획일화에 대한 설명으로 옳지 않은 것은?',['선진국 문화가 세계의 보편 문화로 자리 잡는 현상이 나타난다','전통문화의 정체성이 약해지고 문화 다양성이 감소한다','문화의 상품화로 막대한 자본을 가진 선진국이 유리한 위치를 차지한다','해결을 위해 외래문화를 모두 차단하고 자국 문화만 지켜야 한다','지역 문화의 고유성을 인정하고 보존하려는 태도가 필요하다'],3,'자국 문화 정체성을 유지하면서 외래문화를 능동적으로 수용해야 해요.');
 
+
+/* ---------- 그림 자료 ---------- */
+function setFig(sub,fig,clear){Q.forEach(x=>{if((x.text+'\n'+x.box).includes(sub)){x.fig=fig;if(clear===true)x.box='';else if(clear)x.box=x.box.replace(clear,'').trim();}})}
+setFig('서로에게 제기할 수 있는 비판을 (나)처럼',{t:'arrows',a:'갑',b:'을'},/\n?\(나\) 갑 →A→ 을 \/ 을 →B→ 갑(\n\(A는[^\n]*\))?/);
+setFig('(A: 갑만의 입장, B: 공통 입장, C: 을만의 입장)',{t:'venn',l:'갑',r:'을',reg:['A','B','C']});
+setFig('(A: 세계화만의 특징, B: 공통 특징, C: 지역화만의 특징)',{t:'venn',l:'세계화',r:'지역화',reg:['A','B','C']});
+setFig('그림은 분배 기준 A, B를 비교한 것이다',{t:'venn',l:'A (업적)',r:'B (필요)',reg:['(가)','(나)','(다)']});
+setFig('(나)의 순서도로 구분할 때',{t:'flow',a:'A',ay:'갑의 입장',b:'B',by:'병의 입장',bn:'을의 입장'},/\n\(나\) \[A\][\s\S]*을의 입장/);
+setFig('[A] 예 → 갑 / 아니요 → [B]',{t:'flow',a:'A',ay:'갑의 입장',b:'B',by:'을의 입장',bn:'병의 입장'},/\n*\[A\] 예 → 갑 \/ 아니요 → \[B\]\n\[B\] 예 → 을 \/ 아니요 → 병\n*/);
+setFig('업적, 능력, 필요에 따른 분배가 해당하는 칸',{t:'matrix',row:'결과의 평등까지 고려하는가?',col:'이미 이룬 성과를 기준으로 하는가?'},true);
+setFig('칸트와 베카리아가 해당하는 칸',{t:'matrix',row:'형벌은 범죄 예방 수단인가?',col:'살인자에게 사형이 정당한가?'},true);
+setFig('세계 도시 A, B의 상대적 특징을 나타낸 것이다',{t:'scatter',y:'(가)',x:'(나)',pts:[['A','lo','hi'],['B','hi','lo']]},true);
+setFig('A, B국의 상대적 특징을 나타낸 것이다',{t:'scatter',y:'첨단 기술·금융 서비스 수출 비중',x:'원료·농산물 수출 비중',pts:[['A국','lo','hi'],['B국','hi','lo']]},true);
+setFig('1990년: 부국 20,000달러',{t:'bars',title:'부유한 20개국과 가난한 20개국의 평균 1인당 소득 (가상, 달러)',groups:['1990년','2020년'],series:[['부국',[20000,72000]],['빈국',[500,800]]]},/\[가상 자료\][\s\S]*?\(90배\)\n*/);
+setFig('OTT 시청 상위 100편',{t:'bars',title:'○○국 OTT 시청 상위 100편 비율 (가상, %)',groups:['5년 전','최근'],series:[['특정 선진국 제작물',[40,75]],['자국 제작물',[45,15]]]},/\[가상 자료\][\s\S]*?45% → 15%\n*/);
+setFig('X: 결과의 평등을 추구하는 정도',{t:'xyz',x:'X 결과의 평등 추구',y:'Y 성취동기 자극',z:'Z 약자 배려'},/\n*X: 결과의 평등[\s\S]*약자를 배려하는 정도/);
+
+Q.forEach(x=>{x.box=x.box.replace('정당하다.ㄱ.','정당하다.\n\nㄱ.')});
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+const SV='xmlns="http://www.w3.org/2000/svg" class="fsvg" role="img"';
+function figHTML(f){
+  if(!f)return'';
+  const AR='<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor"/></marker></defs>';
+  if(f.t==='arrows')return`<svg ${SV} viewBox="0 0 320 130">${AR}<circle cx="60" cy="65" r="42" class="fl"/><circle cx="260" cy="65" r="42" class="fl"/><text x="60" y="71" class="tb">${esc(f.a)}</text><text x="260" y="71" class="tb">${esc(f.b)}</text><line x1="104" y1="50" x2="214" y2="50" class="ln" marker-end="url(#ah)"/><line x1="216" y1="82" x2="106" y2="82" class="ln" marker-end="url(#ah)"/><text x="160" y="40" class="tm">A</text><text x="160" y="104" class="tm">B</text></svg><p class="fcap">A: ${esc(f.a)}이 ${esc(f.b)}에게 제기하는 비판 · B: ${esc(f.b)}이 ${esc(f.a)}에게 제기하는 비판</p>`;
+  if(f.t==='venn')return`<svg ${SV} viewBox="0 0 320 170"><circle cx="120" cy="95" r="68" class="fl op"/><circle cx="200" cy="95" r="68" class="fl op"/><text x="95" y="18" class="tb">${esc(f.l)}</text><text x="225" y="18" class="tb">${esc(f.r)}</text><text x="88" y="101" class="tm">${esc(f.reg[0])}</text><text x="160" y="101" class="tm">${esc(f.reg[1])}</text><text x="232" y="101" class="tm">${esc(f.reg[2])}</text></svg><p class="fcap">${esc(f.reg[0])}: ${esc(f.l)}만 · ${esc(f.reg[1])}: 공통 · ${esc(f.reg[2])}: ${esc(f.r)}만</p>`;
+  if(f.t==='flow'){const d=(cx,cy,t)=>`<polygon points="${cx},${cy-24} ${cx+44},${cy} ${cx},${cy+24} ${cx-44},${cy}" class="fl"/><text x="${cx}" y="${cy+6}" class="tm">${esc(t)}</text>`;const r=(cx,cy,t,w)=>`<rect x="${cx-w/2}" y="${cy-15}" width="${w}" height="30" rx="8" class="fl hl"/><text x="${cx}" y="${cy+5}" class="ts">${esc(t)}</text>`;
+    return`<svg ${SV} viewBox="0 0 360 250">${AR}<rect x="10" y="8" width="120" height="30" rx="4" class="fl"/><text x="70" y="28" class="ts">입장을 탐구한다</text><line x1="70" y1="38" x2="70" y2="58" class="ln" marker-end="url(#ah)"/>${d(70,84,f.a)}<line x1="114" y1="84" x2="200" y2="84" class="ln dash"/><line x1="200" y1="84" x2="200" y2="122" class="ln dash" marker-end="url(#ah)"/><text x="157" y="76" class="tx">아니요</text><line x1="70" y1="108" x2="70" y2="200" class="ln" marker-end="url(#ah)"/><text x="82" y="155" class="tx">예</text>${r(70,217,f.ay,100)}${d(200,148,f.b)}<line x1="200" y1="172" x2="200" y2="200" class="ln" marker-end="url(#ah)"/><text x="212" y="190" class="tx">예</text>${r(200,217,f.by,100)}<line x1="244" y1="148" x2="262" y2="148" class="ln dash" marker-end="url(#ah)"/><text x="300" y="128" class="tx">아니요</text>${r(310,148,f.bn,96)}</svg>`;}
+  if(f.t==='matrix')return`<div class="scroll"><table class="mx"><tr><th rowspan="2" colspan="2"></th><th colspan="2">${esc(f.col)}</th></tr><tr><th>예</th><th>아니요</th></tr><tr><th rowspan="2" class="rq">${esc(f.row)}</th><th>예</th><td>A</td><td>B</td></tr><tr><th>아니요</th><td>C</td><td>D</td></tr></table></div>`;
+  if(f.t==='scatter'){const px=v=>v==='hi'?250:110,py=v=>v==='hi'?55:150;return`<svg ${SV} viewBox="0 0 320 210">${AR}<line x1="50" y1="185" x2="50" y2="20" class="ln" marker-end="url(#ah)"/><line x1="50" y1="185" x2="305" y2="185" class="ln" marker-end="url(#ah)"/><text x="58" y="20" class="tx" text-anchor="start">${esc(f.y)} (높음)</text><text x="44" y="182" class="tx" text-anchor="end">낮음</text><text x="300" y="203" class="tx" text-anchor="end">${esc(f.x)} (높음)</text><text x="56" y="203" class="tx" text-anchor="start">낮음</text>${f.pts.map(p=>`<circle cx="${px(p[1])}" cy="${py(p[2])}" r="20" class="fl hl"/><text x="${px(p[1])}" y="${py(p[2])+5}" class="tb">${esc(p[0])}</text>`).join('')}</svg>`;}
+  if(f.t==='bars'){const all=f.series.flatMap(s=>s[1]);const mx=Math.max(...all);const W=320,H=190,base=150,top=25;let s='';f.groups.forEach((g,gi)=>{const gx=55+gi*140;f.series.forEach((se,si)=>{const v=se[1][gi];const h=Math.max(2,(v/mx)*(base-top));const x=gx+si*48;s+=`<rect x="${x}" y="${base-h}" width="40" height="${h}" class="${si?'b2':'b1'}"/><text x="${x+20}" y="${base-h-5}" class="tx">${v.toLocaleString()}</text>`});s+=`<text x="${gx+44}" y="${base+18}" class="ts">${esc(g)}</text>`});
+    const lg=f.series.map((se,si)=>`<rect x="${20+si*150}" y="${H-12}" width="12" height="12" class="${si?'b2':'b1'}"/><text x="${36+si*150}" y="${H-2}" class="tx" text-anchor="start">${esc(se[0])}</text>`).join('');
+    return`<p class="fcap">${esc(f.title)}</p><svg ${SV} viewBox="0 0 ${W} ${H}"><line x1="40" y1="${base}" x2="300" y2="${base}" class="ln"/>${s}${lg}</svg>`;}
+  if(f.t==='xyz')return`<svg ${SV} viewBox="0 0 320 200">${AR}<line x1="140" y1="140" x2="290" y2="140" class="ln" marker-end="url(#ah)"/><line x1="140" y1="140" x2="140" y2="20" class="ln" marker-end="url(#ah)"/><line x1="140" y1="140" x2="50" y2="190" class="ln" marker-end="url(#ah)"/><text x="286" y="160" class="tx" text-anchor="end">${esc(f.x)} → 높음</text><text x="148" y="22" class="tx" text-anchor="start">${esc(f.z)} ↑ 높음</text><text x="56" y="178" class="tx" text-anchor="start">${esc(f.y)}</text><text x="40" y="198" class="tx" text-anchor="start">↙ 높음</text></svg><p class="fcap">(가)를 기준으로 (나)가 각 축에서 높은지 낮은지 판단해요.</p>`;
+  return'';
+}
+function midSplit(x){if(!x.fig||!/arrows|flow/.test(x.fig.t))return null;const i=x.box.indexOf('\n\nㄱ.');return i<0?null:[x.box.slice(0,i),x.box.slice(i+2)]}
+function boxHTML(t){
+  if(!t)return'';
+  const lines=t.split('\n');let out='',tb=[];
+  const flush=()=>{if(!tb.length)return;const rows=tb.map(l=>l.split('|').map(c=>c.trim()));out+='<div class="scroll"><table class="mx dt"><tr>'+rows[0].map(c=>`<th>${esc(c)}</th>`).join('')+'</tr>'+rows.slice(1).map(r=>'<tr>'+r.map(c=>`<td>${esc(c)}</td>`).join('')+'</tr>').join('')+'</table></div>';tb=[]};
+  lines.forEach(l=>{if(/\S\s*\|\s*\S/.test(l))tb.push(l);else{flush();out+=`<div class="bl">${esc(l)||'&nbsp;'}</div>`}});flush();
+  return out;
+}
+
 /* ---------- 상태 ---------- */
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let wrongIds=store.get('tsA_wrong',[]);
@@ -1160,7 +1231,7 @@ function showQ(){
   document.getElementById('barFill').style.width=(run.i/run.list.length*100)+'%';
   document.getElementById('qTags').innerHTML=`<span class="tag l${x.l}">${x.l}</span><span class="tag">${x.t}</span>${x.s==='실전'?'<span class="tag">실전형</span>':x.s==='기출'?'<span class="tag">기출형</span>':''}`;
   document.getElementById('qText').textContent=x.text;
-  const box=document.getElementById('qBox');box.hidden=!x.box;box.textContent=x.box;
+  const box=document.getElementById('qBox');box.hidden=!x.box;const fg=document.getElementById('qFig');const mid=midSplit(x);if(mid){box.innerHTML=boxHTML(mid[0])+'<div class="fig">'+figHTML(x.fig)+'</div>'+boxHTML(mid[1]);fg.hidden=true;}else{box.innerHTML=boxHTML(x.box);fg.hidden=!x.fig;fg.innerHTML=figHTML(x.fig);if(x.fig&&/arrows|flow/.test(x.fig.t))box.after(fg);else box.before(fg);}
   let order=x.o.map((_,k)=>k);if(!keepOrder(x))order=shuffle(order);
   const ul=document.getElementById('opts');ul.innerHTML='';
   order.forEach((k,pos)=>{const li=document.createElement('li');const b=document.createElement('button');
@@ -1202,7 +1273,7 @@ function renderWrong(){
   if(!list.length){box.innerHTML='<p class="empty">틀린 문제가 여기에 모여요.<br>문제를 풀다 틀리면 자동으로 저장되고, 다시 맞히면 빠져요.</p>';return}
   list.forEach(x=>{const d=document.createElement('div');d.className='wn';
     d.innerHTML=`<button class="del">빼기</button><span class="tag l${x.l}">${x.l}</span><span class="tag">${x.u==='2'?'Ⅱ':'Ⅳ'} ${x.t}</span><div class="q"></div><div class="a">정답 <b></b></div><div class="e"></div>`;
-    d.querySelector('.q').textContent=x.text+(x.box?'\n'+x.box:'');d.querySelector('.a b').textContent=x.o[x.a];d.querySelector('.e').textContent=x.e;
+    d.querySelector('.q').textContent=x.text;if(x.fig||x.box){const ex=document.createElement('div');const mid=midSplit(x);const F=x.fig?'<div class="fig">'+figHTML(x.fig)+'</div>':'',B=x.box?'<div class="qbox">'+boxHTML(x.box)+'</div>':'';ex.innerHTML=mid?'<div class="qbox">'+boxHTML(mid[0])+F+boxHTML(mid[1])+'</div>':(x.fig&&/arrows|flow/.test(x.fig.t))?B+F:F+B;d.querySelector('.q').after(ex)}d.querySelector('.a b').textContent=x.o[x.a];d.querySelector('.e').textContent=x.e;
     d.querySelector('.del').onclick=()=>{wrongIds=wrongIds.filter(id=>id!==x.id);store.set('tsA_wrong',wrongIds);renderWrong()};
     box.appendChild(d)});
 }
